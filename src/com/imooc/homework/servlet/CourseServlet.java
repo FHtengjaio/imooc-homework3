@@ -57,6 +57,8 @@ public class CourseServlet extends HttpServlet {
             if (page != null && Objects.equals("", page)) {
                 currentPage = Integer.valueOf(page);
             }
+            System.out.println(title==null);
+            System.out.println(title);
 
             int searchedCount = CourseDaoImpl.getCourseCount(title);
             int totalPage = searchedCount % defaultSize > 0 ? searchedCount % defaultSize + 1 : searchedCount % defaultSize;

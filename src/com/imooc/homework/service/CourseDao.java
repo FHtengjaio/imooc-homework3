@@ -23,7 +23,7 @@ public class CourseDao {
 
     public int getCourseCount(String title){
         List<Course> list = new ArrayList<>();
-        if (Objects.equals("", title) && Objects.equals(null, title)) {
+        if (Objects.equals("", title) || Objects.equals(null, title)) {
             list.addAll(courseMap.values());
         } else {
             for (Course course : courseMap.values()) {
@@ -54,7 +54,7 @@ public class CourseDao {
 
     public List<Course> getCourses(String title, int size, int page) {
         List<Course> list = new ArrayList<>();
-        if (Objects.equals("", title)) {
+        if (Objects.equals("", title) || Objects.equals(null, title)) {
             list.addAll(courseMap.values());
         } else {
             for (Course course : courseMap.values()) {
