@@ -29,8 +29,7 @@ public class UserServlet extends HttpServlet {
                     if (!UserDaoImpl.isUserExist(userName)) {
                         User user = new User(userName, password, "普通管理员");
                         UserDaoImpl.addUser(user);
-                        request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
-                        request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
+                        response.sendRedirect(request.getContextPath()+"/SelectUser");
                     } else {
                         request.setAttribute("msg", "账号已经存在");
                         request.getRequestDispatcher("/WEB-INF/views/biz/addUser.jsp").forward(request, response);

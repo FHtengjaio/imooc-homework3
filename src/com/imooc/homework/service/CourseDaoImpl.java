@@ -18,4 +18,11 @@ public class CourseDaoImpl {
     public static List<Course> getAllCourses() {
         return courseDao.getAllCourses();
     }
+
+    public static List<Course> getCourses(String title, int size, int page) {
+        return courseDao.getCourses(title, size, page);
+    }
+    public static int getCourseCount(String title){
+        return courseDao.getCourseCount(title);
+    }
 }

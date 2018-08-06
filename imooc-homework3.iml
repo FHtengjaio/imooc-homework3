@@ -19,15 +19,24 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.30" level="application_server_libraries" />
     <orderEntry type="module-library">
-      <library>
+      <library name="lib">
         <CLASSES>
           <root url="file://$MODULE_DIR$/web/WEB-INF/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/web/WEB-INF/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Tomcat8">
+        <CLASSES>
+          <root url="file://$USER_HOME$/SourceLib/ApacheTomcat/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/SourceLib/ApacheTomcat/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>
