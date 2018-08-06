@@ -28,16 +28,16 @@
 				</tr>
 			</thead>
 			<tbody>
-			
+			<c:forEach items="${allCourses}" var="course">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${course.id}</td>
+						<td>${course.name}</td>
+						<td>${course.direction}</td>
+						<td>${course.des}</td>
+						<td>${course.time}</td>
+						<td>${course.operator}</td>
 					</tr>
-				
+			</c:forEach>
 			</tbody>
 		</table>
 	</center>

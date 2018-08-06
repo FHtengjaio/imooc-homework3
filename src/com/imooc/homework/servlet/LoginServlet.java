@@ -1,6 +1,6 @@
 package com.imooc.homework.servlet;
 
-import com.imooc.homework.service.CourseDaoImpl;
+import com.imooc.homework.service.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String code = request.getParameter("checkCode");
                 if (!Objects.equals(userName, null) && !Objects.equals(password, null) && !Objects.equals(code, null)) {
-                    boolean login = CourseDaoImpl.login(userName, password);
+                    boolean login = UserDaoImpl.login(userName, password);
                     String sessionCode = (String) request.getSession().getAttribute("code");
                     if (login && Objects.equals(sessionCode.toLowerCase(), code.toLowerCase())) {
                         request.getSession().setAttribute("LoginUser", userName);

@@ -1,7 +1,7 @@
 package com.imooc.homework.servlet;
 
 import com.imooc.homework.data.User;
-import com.imooc.homework.service.CourseDaoImpl;
+import com.imooc.homework.service.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +26,10 @@ public class UserServlet extends HttpServlet {
             if (userName != null && password != null && code != null && operator != null) {
                 String sessionCode = (String) request.getSession().getAttribute("code");
                 if (Objects.equals(sessionCode.toLowerCase(), code.toLowerCase()) && Objects.equals(operator, "imooc")) {
-                    if (!CourseDaoImpl.isUserExist(userName)) {
+                    if (!UserDaoImpl.isUserExist(userName)) {
                         User user = new User(userName, password, "普通管理员");
-                        CourseDaoImpl.addUser(user);
-                        request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+                        UserDaoImpl.addUser(user);
+                        request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
                         request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
                     } else {
                         request.setAttribute("msg", "账号已经存在");
@@ -47,29 +47,29 @@ public class UserServlet extends HttpServlet {
                 return;
             }
         } else if (Objects.equals("/SelectUser", request.getServletPath())) {
-            request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+            request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
             request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
         } else if (Objects.equals("/DeleteUser", request.getServletPath())) {
             String name = request.getParameter("username");
             if (!Objects.equals(name, null) && !Objects.equals(name, "")) {
                 if (!Objects.equals(name, "imooc")) {
-                    if (CourseDaoImpl.isUserExist(name)) {
-                        CourseDaoImpl.delUser(name);
-                        request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+                    if (UserDaoImpl.isUserExist(name)) {
+                        UserDaoImpl.delUser(name);
+                        request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
                         request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
                     } else {
                         request.setAttribute("msg", "你要删除的用户不存在");
-                        request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+                        request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
                         request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
                     }
                 } else {
                     request.setAttribute("msg", "你不能删除超级管理员");
-                    request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+                    request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
                     request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("msg", "请选择你要删除的用户");
-                request.setAttribute("allUsers", CourseDaoImpl.getAllUsers());
+                request.setAttribute("allUsers", UserDaoImpl.getAllUsers());
                 request.getRequestDispatcher("/WEB-INF/views/biz/selectUsers.jsp").forward(request, response);
             }
         }

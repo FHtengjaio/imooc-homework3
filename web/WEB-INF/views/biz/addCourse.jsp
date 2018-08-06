@@ -49,7 +49,7 @@
 				<tr>
 					<td>操作人</td>
 					<td>
-						<input name="operator" type="text" value=" readonly="readonly">
+						<input name="operator" type="text" value="${sessionScope.LoginUser}" readonly="readonly"/>
 					</td>
 				</tr>
 				<tr>

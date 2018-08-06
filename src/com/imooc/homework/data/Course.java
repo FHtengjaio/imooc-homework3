@@ -1,27 +1,27 @@
 package com.imooc.homework.data;
 
 public class Course {
-    private long id;
+    private String id;
     private String name;
     private String direction;
     private String des;
     private double time;
-    private String opreator;
+    private String operator;
 
-    public Course(long id, String name, String direction, String des, double time, String opreator) {
+    public Course(String id, String name, String direction, String des, double time, String operator) {
         this.id = id;
         this.name = name;
         this.direction = direction;
         this.des = des;
         this.time = time;
-        this.opreator = opreator;
+        this.operator = operator;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,12 +57,12 @@ public class Course {
         this.time = time;
     }
 
-    public String getOpreator() {
-        return opreator;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setOpreator(String opreator) {
-        this.opreator = opreator;
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Course {
                 ", direction='" + direction + '\'' +
                 ", des='" + des + '\'' +
                 ", time=" + time +
-                ", opreator='" + opreator + '\'' +
+                ", operator='" + operator + '\'' +
                 '}';
     }
 }

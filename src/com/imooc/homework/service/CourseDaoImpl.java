@@ -1,30 +1,21 @@
 package com.imooc.homework.service;
 
-import com.imooc.homework.data.User;
+import com.imooc.homework.data.Course;
 
 import java.util.List;
 
 public class CourseDaoImpl {
-
     private static final CourseDao courseDao = new CourseDao();
 
-    public static boolean login(String userName, String password) {
-        return courseDao.login(userName, password);
+    public static boolean isCourseExist(String id) {
+        return courseDao.isCourseExist(id);
     }
 
-    public static boolean isUserExist(String userName) {
-        return courseDao.isUserExist(userName);
+    public static void addCourse(Course course) {
+        courseDao.addCourse(course);
     }
 
-    public static void addUser(User user) {
-        courseDao.addUser(user);
-    }
-
-    public static List<User> getAllUsers(){
-        return courseDao.getAllUsers();
-    }
-
-    public static void delUser(String userName){
-        courseDao.delUser(userName);
+    public static List<Course> getAllCourses() {
+        return courseDao.getAllCourses();
     }
 }
