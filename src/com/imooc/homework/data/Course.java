@@ -17,6 +17,8 @@ public class Course {
         this.operator = operator;
     }
 
+    public Course() {}
+
     public String getId() {
         return id;
     }

@@ -14,15 +14,15 @@
 	<center>
 		<h1>课程查询</h1>
 		<hr>
-		<form>
-			<div style="float:left">
+		<form action="<%=basePath%>/GetCourse" method="post" id="search">
+			<div style="float:left" id="count">
 				显示
 				<select name="recordCount">
-				<option value="5">5</option>
-				<option value="10">10</option>
-			</select>
+					<option value="5" selected="selected">5</option>
+					<option value="10">10</option>
+				</select>
 			</div>
-			<div style="float:right; ">搜索<input type="search" name="title"></div>
+			<div style="float:right; ">搜索<input type="search" name="title" id="searchbox" value="${title}"></div>
 			<input type="hidden" value="">
 		<table cellspacing="0px" cellpadding="0px" border="1px" width="100%" class="tablelist" id="example">
 			<thead>
@@ -48,21 +48,21 @@
 			</c:forEach>
 			</tbody>
 		</table>
-			<div style="float:left">总记录数为${searchedCount}条 (全部记录数${totalCount}条)</div>
+			<div style="float:left">查询到${searchedCount}条记录 (全部记录数${totalCount}条)</div>
 			<div style="float:right">
-				<a href="javascript:setPage()" id="1">第一页</a>
-				<a href="javascript:setPage()" id="2">上一页</a>
-				<input type="text" value="${currentPage}" name="page" style="width: 20px" id="page">
-				<a href="javascript:setPage()" id="3">下一页</a>
-				<a href="javascript:setPage()" id="4">最后一页</a>
+				<a href="javascript:setPage(1)" id="1">第一页</a>
+				<a href="javascript:setPage(2)" id="2">上一页</a>
+				<input type="text" value="${currentPage}" name="page" style="width: 20px" id="page" readonly="readonly">
+				<a href="javascript:setPage(3)" id="3">下一页</a>
+				<a href="javascript:setPage(4)" id="4">最后一页</a>
 			</div>
+			<div>${msg}</div>
 		</form>
 	</center>
-	
 </body>
 <script>
     function setPage(id) {
-        var oPageNode = $("page");
+        var oPageNode = $("#page");
         if (id === 1) {
             oPageNode.val(1);
         }else if (id === 2) {
@@ -71,11 +71,44 @@
             }
         }else if (id === 3) {
             if (oPageNode.val() < ${totalPage}) {
-                oPageNode.val(oPageNode.val()+1);
+                oPageNode.val(parseInt(oPageNode.val())+1);
             }
         }else if (id === 4) {
             oPageNode.val(${totalPage});
         }
+        $("#search").submit();
     }
+
+    var flag = false;
+    $('#searchbox').on('compositionstart',function(){
+        flag = true;
+    });
+
+    $('#searchbox').on('compositionend',function(){
+        flag = false;
+        if(!flag){
+            $("#search").submit();
+		}
+    });
+
+    $('#searchbox').on('input propertychange', function() {
+        console.log(flag);
+        if (flag) {
+            return;
+        }
+        $("#search").submit();
+    });
+
+    $(document).ready(function () {
+        var val = $('#searchbox').val();
+        $('#searchbox').val("").focus().val(val);
+        $("select>option[value='${count}']").attr("selected","selected");
+    });
+
+    $("#count").on("change", function () {
+        $("#page").val("1");
+        $("#search").submit();
+    });
 </script>
+
 </html>

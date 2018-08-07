@@ -2,6 +2,12 @@ package com.imooc.homework.servlet;
 
 import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +17,48 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @WebServlet(name = "CourseServlet", urlPatterns = {"/AddCourse", "/GetCourse"})
 public class CourseServlet extends HttpServlet {
+    private ExecutorService service = Executors.newFixedThreadPool(10);
+
+    private void prepareExport(int size, int page, String title) {
+        service.submit(new Runnable() {
+            @Override
+            public void run() {
+                HttpPost httpPost = new HttpPost("http://localhost:8080/PrepareExport?size="+size+"&page="+page+"&title="+title);
+                CloseableHttpClient httpClient = null;
+                CloseableHttpResponse response = null;
+                try {
+                    httpClient = HttpClients.createDefault();
+                    response = httpClient.execute(httpPost);
+                    HttpEntity entity = response.getEntity();
+                    String responseContent = EntityUtils.toString(entity, "UTF-8");
+                    System.out.println("=====================" + responseContent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (null != response) {
+                            response.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        if (null != httpClient) {
+                            httpClient.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -48,28 +93,34 @@ public class CourseServlet extends HttpServlet {
         } else if(Objects.equals("/GetCourse", request.getServletPath())){
             int defaultSize = 5;
             int currentPage = 1;
-            String size = request.getParameter("size");
+            String searchTitle = "";
+            String size = request.getParameter("recordCount");
             String title = request.getParameter("title");
             String page = request.getParameter("page");
-            if (size != null && Objects.equals("", size)) {
+            if (size != null && !Objects.equals("", size)) {
                     defaultSize = Integer.valueOf(size);
             }
-            if (page != null && Objects.equals("", page)) {
+            if (page != null && !Objects.equals("", page)) {
                 currentPage = Integer.valueOf(page);
             }
-            System.out.println(title==null);
-            System.out.println(title);
+            if (title != null) {
+                searchTitle = title;
+            }
 
-            int searchedCount = CourseDaoImpl.getCourseCount(title);
-            int totalPage = searchedCount % defaultSize > 0 ? searchedCount % defaultSize + 1 : searchedCount % defaultSize;
-            List<Course> courses = CourseDaoImpl.getCourses(title, defaultSize, currentPage);
+            int searchedCount = CourseDaoImpl.getCourseCount(searchTitle);
+            int totalPage = searchedCount % defaultSize > 0 ? searchedCount / defaultSize + 1 : searchedCount / defaultSize;
+            List<Course> courses = CourseDaoImpl.getCourses(searchTitle, defaultSize, currentPage);
 
+            prepareExport(defaultSize,currentPage,searchTitle);
+
+            request.setAttribute("msg", request.getAttribute("msg"));
             request.setAttribute("searchedCount",searchedCount);
             request.setAttribute("currentPage",currentPage);
             request.setAttribute("totalCount", CourseDaoImpl.getAllCourses().size());
             request.setAttribute("totalPage", totalPage);
-
+            request.setAttribute("title", searchTitle);
             request.setAttribute("allCourses", courses);
+            request.setAttribute("count", defaultSize);
             request.getRequestDispatcher("/WEB-INF/views/biz/showCourse.jsp").forward(request, response);
         }
     }

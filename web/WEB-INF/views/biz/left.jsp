@@ -40,7 +40,7 @@
 		<div class="c2" id="menu2" style="display:none;">
 			<p><a href="<%=basePath%>/AddCourseInit" target="main">课程添加</a></p>
 			<p><a href="<%=basePath%>/ImportCourseInit" target="main">课程批量导入(Excel)</a></p>
-			<p><a href="<%=basePath%>/ExportCourse" target="main">课程导出</a></p>
+			<p><a href="<%=basePath%>/CourseExport" target="main">课程导出</a></p>
 			<p><a href="<%=basePath%>/GetCourse" target="main">课程查询</a></p>
 		</div>
 	</div>
