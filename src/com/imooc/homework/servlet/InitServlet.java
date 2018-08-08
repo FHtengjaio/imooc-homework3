@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @WebServlet(name = "InitServlet",
-        urlPatterns = {"/TopInit", "/LeftInit", "/LoginInit", "/AddUserInit", "/AddCourseInit", "/ImportCourseInit"})
+        urlPatterns = {"/TopInit.do", "/LeftInit.do", "/LoginInit", "/AddUserInit.do", "/AddCourseInit.do", "/ImportCourseInit.do"})
 public class InitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,18 +21,18 @@ public class InitServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (Objects.equals(request.getServletPath(), "/TopInit")) {
+        if (Objects.equals(request.getServletPath(), "/TopInit.do")) {
             request.getRequestDispatcher("/WEB-INF/views/biz/top.jsp").forward(request, response);
-        } else if (Objects.equals(request.getServletPath(), "/LeftInit")) {
+        } else if (Objects.equals(request.getServletPath(), "/LeftInit.do")) {
             request.getRequestDispatcher("/WEB-INF/views/biz/left.jsp").forward(request, response);
         } else if (Objects.equals("/LoginInit", request.getServletPath())) {
             request.getSession().removeAttribute("LoginUser");
             request.getRequestDispatcher("/WEB-INF/views/biz/index.jsp").forward(request, response);
-        } else if (Objects.equals("/AddUserInit", request.getServletPath())) {
+        } else if (Objects.equals("/AddUserInit.do", request.getServletPath())) {
             request.getRequestDispatcher("/WEB-INF/views/biz/addUser.jsp").forward(request, response);
-        } else if (Objects.equals("/AddCourseInit", request.getServletPath())) {
+        } else if (Objects.equals("/AddCourseInit.do", request.getServletPath())) {
             request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
-        } else if (Objects.equals("/ImportCourseInit", request.getServletPath())) {
+        } else if (Objects.equals("/ImportCourseInit.do", request.getServletPath())) {
             request.getRequestDispatcher("/WEB-INF/views/biz/courseImport.jsp").forward(request, response);
         }
     }

@@ -4,6 +4,7 @@ import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
 import com.imooc.homework.utils.ExcelTool;
 import com.imooc.homework.utils.RequestParser;
+import com.imooc.homework.utils.StringUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -18,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet(name = "CourseImpExpServlet",urlPatterns = {"/CourseImport","/CourseExport","/PrepareExport"})
+@WebServlet(name = "CourseImpExpServlet",urlPatterns = {"/CourseImport.do","/CourseExport.do","/PrepareExport.do"})
 public class CourseImpExpServlet extends HttpServlet {
     private String size;
     private String page;
@@ -46,26 +47,26 @@ public class CourseImpExpServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (Objects.equals("/CourseImport", request.getServletPath())) {
+        if (Objects.equals("/CourseImport.do", request.getServletPath())) {
             FileItem fileItem = RequestParser.getExcel(request);
             if (fileItem != null) {
                 List<Course> courses = ExcelTool.readExcel(fileItem, (String) request.getSession().getAttribute("LoginUser"));
                 String str = CourseDaoImpl.addCourses(courses);
                 System.out.println(str);
                 request.setAttribute("msg", str);
-                request.getRequestDispatcher("/GetCourse").forward(request, response);
+                request.getRequestDispatcher("/GetCourse.do").forward(request, response);
             } else {
                 request.setAttribute("msg", "请选择xls文件");
                 request.getRequestDispatcher("/WEB-INF/views/biz/courseImport.jsp").forward(request, response);
             }
-        } else if (Objects.equals("/PrepareExport", request.getServletPath())) {
+        } else if (Objects.equals("/PrepareExport.do", request.getServletPath())) {
             String size = request.getParameter("size");
             String page = request.getParameter("page");
             String title = request.getParameter("title");
             if (size != null && page != null && title != null) {
-                setSize(size);
-                setPage(page);
-                setTitle(title);
+                setSize(StringUtil.trim(size));
+                setPage(StringUtil.trim(page));
+                setTitle(StringUtil.trim(title));
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/text; charset=utf-8");
                 PrintWriter out = null;
@@ -80,7 +81,7 @@ public class CourseImpExpServlet extends HttpServlet {
                     }
                 }
             }
-        } else if (Objects.equals("/CourseExport", request.getServletPath())) {
+        } else if (Objects.equals("/CourseExport.do", request.getServletPath())) {
             if (size != null && page != null && title != null) {
                 List<Course> courses = CourseDaoImpl.getCourses(title);
                 Workbook book = ExcelTool.writeExcel(courses);
@@ -91,7 +92,7 @@ public class CourseImpExpServlet extends HttpServlet {
                 book.close();
                 outputStream.close();
 
-                request.getRequestDispatcher("/GetCourse?size="+size+"&page="+page+"&title="+title);
+                request.getRequestDispatcher("/GetCourse.do?size="+size+"&page="+page+"&title="+title);
             }
         }
     }

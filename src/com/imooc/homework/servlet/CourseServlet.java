@@ -2,6 +2,8 @@ package com.imooc.homework.servlet;
 
 import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
+import com.imooc.homework.utils.RegexUtil;
+import com.imooc.homework.utils.StringUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -20,7 +22,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@WebServlet(name = "CourseServlet", urlPatterns = {"/AddCourse", "/GetCourse"})
+@WebServlet(name = "CourseServlet", urlPatterns = {"/AddCourse.do", "/GetCourse.do"})
 public class CourseServlet extends HttpServlet {
     private ExecutorService service = Executors.newFixedThreadPool(10);
 
@@ -28,7 +30,7 @@ public class CourseServlet extends HttpServlet {
         service.submit(new Runnable() {
             @Override
             public void run() {
-                HttpPost httpPost = new HttpPost("http://localhost:8080/PrepareExport?size="+size+"&page="+page+"&title="+title);
+                HttpPost httpPost = new HttpPost("http://localhost:8080/PrepareExport.do?size="+size+"&page="+page+"&title="+title);
                 CloseableHttpClient httpClient = null;
                 CloseableHttpResponse response = null;
                 try {
@@ -69,28 +71,38 @@ public class CourseServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (Objects.equals("/AddCourse", request.getServletPath())) {
+        if (Objects.equals("/AddCourse.do", request.getServletPath())) {
             String courseId = request.getParameter("courseId");
             String courseName = request.getParameter("courseName");
             String courseType = request.getParameter("courseType");
             String description = request.getParameter("description");
             String courseTime = request.getParameter("courseTime");
-            String operator = request.getParameter("operator");
+            //操作人需要跟登录人一致，页面提交的数据有可能被篡改
+            String operator = (String) request.getSession().getAttribute("LoginUser");
             if (courseId != null && courseName != null && courseType != null
-                    && description != null && courseTime != null && operator != null) {
-                if (!CourseDaoImpl.isCourseExist(courseId)) {
-                    Course course = new Course(courseId, courseName, courseType, description, Double.valueOf(courseTime), operator);
-                    CourseDaoImpl.addCourse(course);
-                    response.sendRedirect(request.getContextPath()+"/GetCourse");
+                    && description != null && courseTime != null && operator != null
+                    && !Objects.equals(courseId, "") && !Objects.equals(courseName, "")
+                    && !Objects.equals(courseType, "") && !Objects.equals(description, "")
+                    && !Objects.equals(courseTime, "") && !Objects.equals(operator, "")) {
+                if (RegexUtil.isCourseIdRight(courseId) && RegexUtil.isTimeRight(courseTime)) {
+                    if (!CourseDaoImpl.isCourseExist(courseId)) {
+                        Course course = new Course(courseId, StringUtil.trim(courseName), StringUtil.trim(courseType),
+                                StringUtil.trim(description), Double.valueOf(courseTime), StringUtil.trim(operator));
+                        CourseDaoImpl.addCourse(course);
+                        response.sendRedirect(request.getContextPath() + "/GetCourse.do");
+                    } else {
+                        request.setAttribute("msg", "课程编号已经存在");
+                        request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
+                    }
                 } else {
-                    request.setAttribute("msg", "课程编号已经存在");
+                    request.setAttribute("msg", "请填写格式正确的id和时长");
                     request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("msg", "请填写所有字段");
                 request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
             }
-        } else if(Objects.equals("/GetCourse", request.getServletPath())){
+        } else if(Objects.equals("/GetCourse.do", request.getServletPath())){
             int defaultSize = 5;
             int currentPage = 1;
             String searchTitle = "";
@@ -111,11 +123,20 @@ public class CourseServlet extends HttpServlet {
             int totalPage = searchedCount % defaultSize > 0 ? searchedCount / defaultSize + 1 : searchedCount / defaultSize;
             List<Course> courses = CourseDaoImpl.getCourses(searchTitle, defaultSize, currentPage);
 
+            //传递searchTitle可以让用户下载他所搜到的信息
+            //defaultSize,currentPage,这两个参数用于下载完成后，页面跳转回GetCourse时，还是保持显示搜索前的内容
             prepareExport(defaultSize,currentPage,searchTitle);
 
-            request.setAttribute("msg", request.getAttribute("msg"));
-            request.setAttribute("searchedCount",searchedCount);
-            request.setAttribute("currentPage",currentPage);
+            /*
+            * 以下的方法也可以用于用户下载，将参数保存在session域中，方便在/CourseExport中获取
+            * request.getSession.setAttribute("size", defaultSize);
+            * request.getSession.setAttribute("page", currentPage);
+            * request.getSession.setAttribute("title", searchTitle);
+            * */
+
+            request.setAttribute("msg", request.getAttribute("msg"));  //导入课程时才会有此message
+            request.setAttribute("searchedCount",searchedCount);    //设置所有关键字符合的数量
+            request.setAttribute("currentPage",currentPage);       //设置当前的页面编号
             request.setAttribute("totalCount", CourseDaoImpl.getAllCourses().size());
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("title", searchTitle);

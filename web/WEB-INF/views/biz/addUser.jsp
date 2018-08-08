@@ -27,16 +27,16 @@
 				<input type="hidden" name="operator" value="${sessionScope.LoginUser}">
 				<tr>
 					<td>用户名</td>
-					<td><input type="text" name="username" placeholder="用户名为3-12位字母数字或下划线组合" ></td>
+					<td><input type="text" name="username" placeholder="用户名为3-12位字母数字或下划线组合" pattern="[a-zA-Z0-9_]{3,12}" required="required"></td>
 				</tr>
 				<tr>
 					<td>密&nbsp;码</td>
-					<td><input type="password" name="password" placeholder="密码长度为5-12位字母数字或下划线组合" ></td>
+					<td><input type="password" name="password" placeholder="密码长度为5-12位字母数字或下划线组合" pattern="[a-zA-Z0-9_]{5,12}" required="required"></td>
 				</tr>
 				<tr>
 					<td>验证码</td>
 					<td>
-						<input type="text" name="checkCode" placeholder="请输入验证码" >
+						<input type="text" name="checkCode" placeholder="请输入4位验证码" maxlength="4" pattern="[a-zA-Z0-9]{4}" required="required">
 						<img src="<%=basePath%>/VerifyCode" id="code">
 					</td>
 				</tr>
