@@ -3,10 +3,8 @@ package com.imooc.homework.utils;
 import com.imooc.homework.data.Course;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,5 +33,32 @@ public class ExcelTool {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static Workbook writeExcel(List<Course> courses) {
+        Workbook book = new XSSFWorkbook();
+        Sheet sheet = book.createSheet();
+        CellStyle cellStyle = book.createCellStyle();
+        Font font = book.createFont();
+        cellStyle.setFont(font);
+        font.setBold(true);
+        Row firstRow = sheet.createRow(0);
+        String[] titles = {"课程ID","课程名称", "方向", "描述", "时长", "创建人"};
+        for (int i = 0; i < 6; i++) {
+            Cell cell = firstRow.createCell(i);
+            cell.setCellStyle(cellStyle);
+            cell.setCellValue(titles[i]);
+        }
+        for (int i = 0; i < courses.size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            row.createCell(0).setCellValue(courses.get(i).getId());
+            row.createCell(1).setCellValue(courses.get(i).getName());
+            row.createCell(2).setCellValue(courses.get(i).getDirection());
+            row.createCell(3).setCellValue(courses.get(i).getDes());
+            row.createCell(4).setCellValue(courses.get(i).getTime());
+            row.createCell(5).setCellValue(courses.get(i).getOperator());
+        }
+
+        return book;
     }
 }

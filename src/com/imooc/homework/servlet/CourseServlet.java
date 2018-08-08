@@ -36,7 +36,7 @@ public class CourseServlet extends HttpServlet {
                     response = httpClient.execute(httpPost);
                     HttpEntity entity = response.getEntity();
                     String responseContent = EntityUtils.toString(entity, "UTF-8");
-                    System.out.println("=====================" + responseContent);
+                    System.out.println("准备下载" + responseContent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

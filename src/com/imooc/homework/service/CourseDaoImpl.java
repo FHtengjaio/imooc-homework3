@@ -29,4 +29,8 @@ public class CourseDaoImpl {
     public static String addCourses(List<Course> courses) {
         return courseDao.addCourses(courses);
     }
+
+    public static List<Course> getCourses(String title) {
+        return courseDao.getCourses(title);
+    }
 }

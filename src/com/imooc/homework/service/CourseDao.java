@@ -36,39 +36,22 @@ public class CourseDao {
     }
 
     public int getCourseCount(String title){
-        List<Course> list = new ArrayList<>();
-        if (Objects.equals("", title) || Objects.equals(null, title)) {
-            list.addAll(courseMap.values());
-        } else {
-            for (Course course : courseMap.values()) {
-                if (Objects.equals(course.getId(), title)) {
-                    list.add(course);
-                    break;
-                } else if (course.getName().contains(title)) {
-                    list.add(course);
-                } else if (Objects.equals(course.getDirection(), title)) {
-                    list.add(course);
-                } else if (Objects.equals(course.getOperator(), title)) {
-                    list.add(course);
-                } else if (course.getDes().contains(title)) {
-                    list.add(course);
-                } else {
-                    try {
-                        double time = Double.valueOf(title);
-                        if (time == course.getTime()) {
-                            list.add(course);
-                        }
-                    } catch (NumberFormatException ignored) {
-                    }
-
-                }
-            }
-        }
-
+        List<Course> list = getCourses(title);
         return list.size();
     }
 
     public List<Course> getCourses(String title, int size, int page) {
+
+        List<Course> list = getCourses(title);
+
+        int totalCourseCount = list.size();
+        int start = (page - 1) * size > totalCourseCount ? 0 : (page - 1) * size;
+        int end = totalCourseCount > page * size ? page * size : totalCourseCount;
+
+        return list.subList(start, end);
+    }
+
+    public List<Course> getCourses(String title) {
         List<Course> list = new ArrayList<>();
         if (Objects.equals("", title) || Objects.equals(null, title)) {
             list.addAll(courseMap.values());
@@ -97,13 +80,7 @@ public class CourseDao {
                 }
             }
         }
-
-        int totalCourseCount = list.size();
-//        int totalPage = totalCourseCount % size > 0 ? totalCourseCount / size + 1 : totalCourseCount / size;
-        int start = (page - 1) * size > totalCourseCount ? 0 : (page - 1) * size;
-        int end = totalCourseCount > page * size ? page * size : totalCourseCount;
-
-        return list.subList(start, end);
+        return list;
     }
 
     public String addCourses(List<Course> courses) {
