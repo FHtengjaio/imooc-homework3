@@ -7,14 +7,14 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>课程添加</title>
-<link href="../../css/style.css" type="text/css" rel="stylesheet"/>
+<link href="../../../css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 	<center>
 		<h1>课程添加</h1>
 		<div class="msg">${msg}</div>
 		<hr>
-		<form action="<%=basePath%>/AddCourse" method="post" >
+		<form action="<%=basePath%>/AddCourse.do" method="post" >
 			<table width="400px" cellspacing="0px" cellpadding="0px" border="1px">
 				<tr>
 					<td>课程ID</td>

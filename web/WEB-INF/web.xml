@@ -9,4 +9,9 @@
             <include-prelude>/WEB-INF/views/biz/common.jsp</include-prelude>
         </jsp-property-group>
     </jsp-config>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error/404.jsp</location>
+    </error-page>
 </web-app>

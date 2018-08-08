@@ -33,7 +33,7 @@
 								<td>-</td>
 							</c:when>
 							<c:otherwise>
-								<td><a href="<%=basePath%>/DeleteUser?username=${user.name}">删除</a></td>
+								<td><a href="<%=basePath%>/DeleteUser.do?username=${user.name}">删除</a></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>

@@ -9,9 +9,9 @@
 <title>课程后台管理系统</title>
 </head>
 	<frameset rows="20%,*">
-		<frame src="<%=basePath%>/TopInit"></frame>
+		<frame src="<%=basePath%>/TopInit.do"></frame>
 		<frameset cols="15%,*">
-			<frame src="<%=basePath%>/LeftInit"></frame>
+			<frame src="<%=basePath%>/LeftInit.do"></frame>
 			<frame name="main"></frame>
 		</frameset>
 	</frameset>

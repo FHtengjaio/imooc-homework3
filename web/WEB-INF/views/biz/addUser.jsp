@@ -14,7 +14,7 @@
         });
     });
 </script>
-<link href="../../css/style.css" type="text/css" rel="stylesheet"/>
+<link href="../../../css/style.css" type="text/css" rel="stylesheet"/>
 <title>管理员添加</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 		<h1>添加管理员</h1>
 		<div class="msg">${msg}</div>
 		<hr>
-		<form action="<%=basePath%>/AddUser" method="post" onsubmit="">
+		<form action="<%=basePath%>/AddUser.do" method="post" onsubmit="">
 			<table width="300px" cellspacing="0px" cellpadding="0px" border="1px">
 				<input type="hidden" name="operator" value="${sessionScope.LoginUser}">
 				<tr>

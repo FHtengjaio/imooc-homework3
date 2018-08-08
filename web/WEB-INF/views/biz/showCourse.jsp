@@ -14,7 +14,7 @@
 	<center>
 		<h1>课程查询</h1>
 		<hr>
-		<form action="<%=basePath%>/GetCourse" method="post" id="search">
+		<form action="<%=basePath%>/GetCourse.do" method="post" id="search">
 			<div style="float:left" id="count">
 				显示
 				<select name="recordCount">

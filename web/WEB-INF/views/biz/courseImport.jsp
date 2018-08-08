@@ -13,7 +13,7 @@
 		<h1>课程批量导入</h1>
 		<div>${msg}</div>
 		<hr>
-		<form action="<%=basePath%>/CourseImport" method="post" enctype="multipart/form-data">
+		<form action="<%=basePath%>/CourseImport.do" method="post" enctype="multipart/form-data">
 			<table cellspacing="0px" cellpadding="0px" border="1px" width="400px">
 				<tr>
 					<td>Excel文件</td>

@@ -26,8 +26,8 @@
 			<div class="c1">
 				<h3 id="controlUser">用户管理</h3>
 				<div class="c2" id="menu1" style="display:none;">
-					<p><a href="<%=basePath%>/AddUserInit" target="main">添加管理员</a></p>
-					<p><a href="<%=basePath%>/SelectUser" target="main">查询管理员</a></p>
+					<p><a href="<%=basePath%>/AddUserInit.do" target="main">添加管理员</a></p>
+					<p><a href="<%=basePath%>/SelectUser.do" target="main">查询管理员</a></p>
 				</div>
 			</div>
 		</c:when>
@@ -38,10 +38,10 @@
 	<div class="c1">
 		<h3 id="controlCourse">课程管理</h3>
 		<div class="c2" id="menu2" style="display:none;">
-			<p><a href="<%=basePath%>/AddCourseInit" target="main">课程添加</a></p>
-			<p><a href="<%=basePath%>/ImportCourseInit" target="main">课程批量导入(Excel)</a></p>
-			<p><a href="<%=basePath%>/CourseExport" target="main">课程导出</a></p>
-			<p><a href="<%=basePath%>/GetCourse" target="main">课程查询</a></p>
+			<p><a href="<%=basePath%>/AddCourseInit.do" target="main">课程添加</a></p>
+			<p><a href="<%=basePath%>/ImportCourseInit.do" target="main">课程批量导入(Excel)</a></p>
+			<p><a href="<%=basePath%>/CourseExport.do" target="main">课程导出</a></p>
+			<p><a href="<%=basePath%>/GetCourse.do" target="main">课程查询</a></p>
 		</div>
 	</div>
 

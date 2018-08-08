@@ -4,12 +4,6 @@ import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
 import com.imooc.homework.utils.RegexUtil;
 import com.imooc.homework.utils.StringUtil;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,47 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @WebServlet(name = "CourseServlet", urlPatterns = {"/AddCourse.do", "/GetCourse.do"})
 public class CourseServlet extends HttpServlet {
-    private ExecutorService service = Executors.newFixedThreadPool(10);
-
-    private void prepareExport(int size, int page, String title) {
-        service.submit(new Runnable() {
-            @Override
-            public void run() {
-                HttpPost httpPost = new HttpPost("http://localhost:8080/PrepareExport.do?size="+size+"&page="+page+"&title="+title);
-                CloseableHttpClient httpClient = null;
-                CloseableHttpResponse response = null;
-                try {
-                    httpClient = HttpClients.createDefault();
-                    response = httpClient.execute(httpPost);
-                    HttpEntity entity = response.getEntity();
-                    String responseContent = EntityUtils.toString(entity, "UTF-8");
-                    System.out.println("准备下载" + responseContent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (null != response) {
-                            response.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        if (null != httpClient) {
-                            httpClient.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -123,16 +79,11 @@ public class CourseServlet extends HttpServlet {
             int totalPage = searchedCount % defaultSize > 0 ? searchedCount / defaultSize + 1 : searchedCount / defaultSize;
             List<Course> courses = CourseDaoImpl.getCourses(searchTitle, defaultSize, currentPage);
 
-            //传递searchTitle可以让用户下载他所搜到的信息
-            //defaultSize,currentPage,这两个参数用于下载完成后，页面跳转回GetCourse时，还是保持显示搜索前的内容
-            prepareExport(defaultSize,currentPage,searchTitle);
 
-            /*
-            * 以下的方法也可以用于用户下载，将参数保存在session域中，方便在/CourseExport中获取
-            * request.getSession.setAttribute("size", defaultSize);
-            * request.getSession.setAttribute("page", currentPage);
-            * request.getSession.setAttribute("title", searchTitle);
-            * */
+
+            request.getSession().setAttribute("size", defaultSize);
+            request.getSession().setAttribute("page", currentPage);
+            request.getSession().setAttribute("title", searchTitle);
 
             request.setAttribute("msg", request.getAttribute("msg"));  //导入课程时才会有此message
             request.setAttribute("searchedCount",searchedCount);    //设置所有关键字符合的数量
