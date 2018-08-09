@@ -11,17 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
-@WebServlet(name = "VerifyCodeServlet",urlPatterns = "/VerifyCode")
+@WebServlet(name = "VerifyCodeServlet",urlPatterns = {"/VerifyCode", "/CheckCode"})
 public class VerifyCodeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BufferedImage image = BuildVerfiyCode.buildCode(40, 20, request);
-        ServletOutputStream outputStream = response.getOutputStream();
-        boolean write = ImageIO.write(image, "jpg", outputStream);
-        outputStream.close();
+        if (Objects.equals("/VerifyCode", request.getServletPath())) {
+            BufferedImage image = BuildVerfiyCode.buildCode(40, 20, request);
+            ServletOutputStream outputStream = response.getOutputStream();
+            boolean write = ImageIO.write(image, "jpg", outputStream);
+            outputStream.close();
+        } else if (Objects.equals("/CheckCode", request.getServletPath())) {
+            String code = request.getParameter("code");
+            ServletOutputStream outputStream = response.getOutputStream();
+            if (code != null && !Objects.equals("", code)) {
+                String sessionCode = (String) request.getSession().getAttribute("code");
+                if (Objects.equals(code, sessionCode)) {
+                    outputStream.write("success".getBytes("utf-8"));
+                    return;
+                }
+            }
+            outputStream.write("fail".getBytes("utf-8"));
+        }
     }
 }
