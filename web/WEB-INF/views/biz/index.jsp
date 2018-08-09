@@ -33,35 +33,13 @@
 	}
 </style>
 <script src="../../../js/jquery-3.3.1.js"></script>
-<script>
-	$(document).ready(function () {
-		$("#code").click(function () {
-			$("#code").attr("src", "<%=basePath%>/VerifyCode?time="+new Date().getTime() );
-		});
-	});
-    function checkcode() {
-        console.log("开始");
-        var vCode = $("#code").val();
-        var param = {"code":vCode};
-        $.post("<%=basePath%>/CheckCode", param, function (data) {
-            alert(data);
-            if(data === "success")
-                return true;
-            else {
-                alert("验证码出错");
-                $("#code").click();
-                return false;
-            }
-        })
-    }
-
-</script>
+<script src="../../../js/coderealtive.js"></script>
 </head>
 <body >
 	<center>
 		<h1>用户登录</h1>
 		<div class="msg">${msg}</div>
-		<form action="<%=basePath%>/Login" method="post" id="loginForm" onsubmit="return checkcode()">
+		<form action="<%=basePath%>/Login" method="post" id="loginForm">
 			<table width="300px" cellspacing="0px" cellpadding="0px" border="1px">
 				<tr>
 					<td>用户名</td>
@@ -80,7 +58,7 @@
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align:center">
-						<input type="submit" value="登录" >
+						<input type="button" value="登录" id="login">
 						<input type="reset" value="取消" >
 					</td>
 				</tr>
