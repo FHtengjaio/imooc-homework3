@@ -30,7 +30,7 @@ public class VerifyCodeServlet extends HttpServlet {
             ServletOutputStream outputStream = response.getOutputStream();
             if (code != null && !Objects.equals("", code)) {
                 String sessionCode = (String) request.getSession().getAttribute("code");
-                if (Objects.equals(code, sessionCode)) {
+                if (Objects.equals(code.toLowerCase(), sessionCode.toLowerCase())) {
                     outputStream.write("success".getBytes("utf-8"));
                     return;
                 }
