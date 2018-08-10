@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #a7a8ad;
+        }
+        .login_box{
+            width: 400px;
+            height: 460px;
+            background-color: white;
+            border-radius: 6px;
+            margin: auto;
+            position: relative;
+        }
+        .login_title{
+            position: absolute;
+            margin: 50px auto 28px;
+            font-size: 28px;
+            text-align: center;
+            width: 100%;
+        }
+        .form_login{
+            margin: 115px auto 0;
+            width: 86%;
+            position: absolute;
+            padding-left: 7%;
+            padding-right: 7%;
+        }
+        .login_info_row{
+            margin-bottom: 10px;
+        }
+        .login_info{
+            height: 28px;
+            padding: 10px;
+            border: 1px solid #dae4eb;
+        }
+        .login_info div{
+            width: 15%;
+            float: left;
+            text-align: right;
+        }
+        .login_info input{
+            border: none;
+            width: 65%;
+            margin-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <div class="login_box">
+        <div class="login_title">账号登录</div>
+        <form class="form_login">
+            <div class="login_info_row">
+                <div class="login_info">
+                    <div>用户名</div><input type="text" name="username" placeholder="用户名为3-12位字母数字或下划线组合">
+                </div>
+            </div>
+            <div class="login_info_row">
+                <div class="login_info">
+                    <div>密码</div><input type="password" name="password" placeholder="长度为5-12位字母数字或下划线组合">
+                </div>
+            </div>
+            <div class="login_info_row">
+                <div class="login_info">
+                    <div>验证码</div><input type="text" name="checkCode" placeholder="请输入4位验证码" id="inputCode" maxlength="4">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
