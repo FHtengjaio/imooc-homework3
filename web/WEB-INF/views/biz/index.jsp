@@ -44,7 +44,6 @@
         var vCode = $("#code").val();
         var param = {"code":vCode};
         $.post("<%=basePath%>/CheckCode", param, function (data) {
-            alert(data);
             if(data === "success")
                 return true;
             else {
