@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body, html {
+            height:100%;
+            margin: 0;
+            padding: 0;
+        }
+        .top{
+            height: 100px;
+            background-color: #45B5DA;
+            box-shadow: 0 3px 5px rgba(0,0,0, .3);
+        }
+        .bd{
+            top: 110px;
+            bottom: 10px;
+            right: 0;
+            left: 0;
+            position: absolute;
+            margin: 0 10px;
+        }
+        .selcetion{
+            top: 0;
+            left: 0;
+            bottom:0;
+            background-color: #fff;
+            width:270px;
+            float: left;
+            position: absolute;
+            box-shadow: 0 0 5px rgba(0,0,0,.3);
+        }
+        .content{
+            top: 0;
+            left: 280px;
+            bottom: 0;
+            right: 0;
+            background-color: #fff;
+            position: absolute;
+            box-shadow: 0 0 5px rgba(0,0,0,.3);
+        }
+        .title{
+            margin: auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        h1{
+            position: absolute;
+            color:white;
+        }
+        .login_user{
+            float: right;
+            max-width: 300px;
+            max-height: 100px;
+        }
+        .show_info{
+            margin-top: 50px;
+            margin-right: 50px;
+        }
+        .show_info span{
+            color:green;
+            font-size: 25px;
+        }
+        .control_box{
+            margin: 10px;
+            padding: 40px 20px 40px 40px;
+        }
+        ul{
+            list-style: none;
+            margin-top: 5px;
+            margin-bottom: 0;
+            display: none;
+            padding-left: 20px;
+        }
+        li{
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        span{
+            color: #4085ff;
+            cursor: pointer;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+            padding: 0 4px;
+        }
+        /*a:hover{*/
+            /*color: #4085ff;*/
+            /*background-color: #fff;*/
+        /*}*/
+        .control_content{
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .on{
+            background-color: #08c;
+            color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0 .5);
+            border-radius: 3px;
+        }
+        iframe{
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    </style>
+    <script src="../../../js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("span").on("click", function () {
+                $(this).next("ul").slideToggle(800);
+            });
+            $("a").on("click", function () {
+                $("a").removeClass("on");
+                $(this).addClass("on");
+                $("#link_content").attr("src", $(this).attr("src"));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="title">
+            <h1>课程后台管理系统</h1>
+        </div>
+        <div class="login_user">
+            <div class="show_info">
+                你好,<span>imooc</span>
+            </div>
+        </div>
+    </div>
+    <div class="bd">
+        <div class="selcetion">
+            <div class="control_box">
+                <div class="control_content">
+                    <span>用户管理</span>
+                    <ul>
+                        <li><a href="addUser.html" target="main">添加管理员</a></li>
+                        <li><a href="selectUsers.html" target="main">查询管理员</a></li>
+                    </ul>
+                </div>
+                <div class="control_content">
+                    <span>课程管理</span>
+                    <ul>
+                        <li><a href="addCourse.html" target="main">课程添加</a></li>
+                        <li><a href="" target="main">课程批量导入(Excel)</a></li>
+                        <li><a href="" target="main">课程导出</a></li>
+                        <li><a href="" target="main">课程查询</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <iframe id="link_content" name="main" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+</html>

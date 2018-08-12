@@ -7,7 +7,17 @@ $(document).ready(function () {
         $("#code").attr("src", "http://localhost:8080/VerifyCode?time="+new Date().getTime() );
     });
 
-    $("#login").on("click", checkcode);
+    $(".btn_area button:last-child").on("click", function () {
+        unNode.val("");
+        passwdNode.val("");
+        $("#inputCode").val("");
+        unNode.parent().removeClass("regexError");
+        passwdNode.parent().removeClass("regexError");
+        unNode.next().hide();
+        passwdNode.next().hide();
+    });
+
+    $(".btn_area button:first-child").on("click", checkcode);
 
     function checkcode() {
         var vCode = $("#inputCode").val();
@@ -19,7 +29,7 @@ $(document).ready(function () {
         }
         $.post("http://localhost:8080/CheckCode", param, function (data) {
             if(data === "success"){
-                $("#loginForm").submit();
+                $(".form_login").submit();
             }
             else {
                 alert("验证码出错");
@@ -30,10 +40,10 @@ $(document).ready(function () {
     }
 
     unNode.on("blur", {node:unNode, regex:/^[a-zA-Z0-9_]{3,12}$/}, checkelement);
-    unNode.on("focus", function () { $(this).removeClass("regexerror"); });
+    unNode.on("focus", function () { $(this).parent().removeClass("regexError");$(this).next().hide(); });
 
     passwdNode.on("blur", {node:passwdNode, regex:/^[a-zA-Z0-9_]{5,12}$/}, checkelement);
-    passwdNode.on("focus", function () { $(this).removeClass("regexerror"); });
+    passwdNode.on("focus", function () { $(this).parent().removeClass("regexError");$(this).next().hide();});
 
 
     function checkelement(param) {
@@ -48,11 +58,10 @@ $(document).ready(function () {
         }
 
         if (!regex.test(oNode.val())) {
-            oNode.addClass("regexerror");
+            oNode.parent().addClass("regexError");
             oNode.next().show();
             return false;
         } else {
-            oNode.next().hide();
             return true;
         }
     }

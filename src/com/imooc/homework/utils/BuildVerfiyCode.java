@@ -14,27 +14,25 @@ public class BuildVerfiyCode {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = image.getGraphics();
 
+        graphics.setColor(new Color(0xf9,0xf9,0xf9));
+
         graphics.fillRect(0, 0, width, height);
 
-        Color[] colors = {Color.BLUE, Color.CYAN, Color.GREEN,
-                Color.MAGENTA, Color.ORANGE, Color.PINK,
-                Color.RED, Color.YELLOW, Color.LIGHT_GRAY,
-                Color.BLACK};
         //画50条干扰线
-        /*
-        for (int i = 0; i < 50; i++) {
+
+        for (int i = 0; i < 30; i++) {
             graphics.setColor(new Color(random.nextInt(180), random.nextInt(225), random.nextInt(200)));
             graphics.drawLine(random.nextInt(width), random.nextInt(height), random.nextInt(width), random.nextInt(height));
         }
-        */
+
 
         //画4个字符
-        graphics.setFont(new Font("Fixedsys", Font.BOLD, width / 4));
+        graphics.setFont(new Font("微软雅黑", Font.BOLD, width / 4));
         for (int i = 0; i < 4; i++) {
             String drawString = getRandomChar();
             sb.append(drawString);
             graphics.setColor(new Color(random.nextInt(180), random.nextInt(225), random.nextInt(200)));
-            graphics.drawString(drawString, i * (width /4),height - (height - (width / 4)) / 2);
+            graphics.drawString(drawString, i * (width /4)+5,height - (height - (width / 4)) / 2);
         }
         graphics.dispose();
         System.out.println(sb.toString());

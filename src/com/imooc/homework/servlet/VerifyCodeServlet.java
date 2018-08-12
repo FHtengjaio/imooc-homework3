@@ -21,9 +21,9 @@ public class VerifyCodeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (Objects.equals("/VerifyCode", request.getServletPath())) {
-            BufferedImage image = BuildVerfiyCode.buildCode(40, 20, request);
+            BufferedImage image = BuildVerfiyCode.buildCode(98, 48, request);
             ServletOutputStream outputStream = response.getOutputStream();
-            boolean write = ImageIO.write(image, "jpg", outputStream);
+            ImageIO.write(image, "jpg", outputStream);
             outputStream.close();
         } else if (Objects.equals("/CheckCode", request.getServletPath())) {
             String code = request.getParameter("code");

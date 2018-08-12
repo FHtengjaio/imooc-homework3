@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <link rel="stylesheet" href="../../../css/form.css" type="text/css">
+</head>
+<body>
+<div class="header">
+    <span>用户管理</span>>><span>添加管理员</span>>>
+</div>
+<div class="login_box">
+    <div class="login_title">添加管理员</div>
+    <div class="error_msg">${msg}</div>
+    <form class="form_login" action="" method="post">
+        <div class="login_info_row">
+            <div class="login_info">
+                <div>用户名</div>
+                <input type="text" name="username" placeholder="长度为3-12位字母数字或下划线组合">
+                <div class="regexmsg">格式错误</div>
+            </div>
+        </div>
+        <div class="login_info_row">
+            <div class="login_info">
+                <div>密&nbsp;&nbsp;&nbsp;码</div>
+                <input type="password" name="password" placeholder="长度为5-12位字母数字或下划线组合">
+                <div class="regexmsg">格式错误</div>
+            </div>
+        </div>
+        <div class="login_info_row">
+            <div class="login_info code">
+                <div>验证码</div>
+                <input type="text" name="checkCode" placeholder="请输入4位验证码" id="inputCode" maxlength="4">
+            </div>
+            <div class="img_contain">
+                <img id="code" src="<%=basePath%>/VerifyCode">
+            </div>
+        </div>
+        <div class="btn_area">
+            <button type="button">添加</button>
+            <button type="button">取消</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
