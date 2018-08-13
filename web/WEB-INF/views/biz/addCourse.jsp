@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/addCourse_special.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
+	<script src="../../../js/adduser.js"></script>
 </head>
 <body>
 <div class="header">
@@ -18,19 +19,19 @@
 <div class="main_box new">
 	<div class="title title_new">课程添加</div>
 	<div class="error_msg error_msg_new">${msg}</div>
-	<form class="form_box form_box_new" action="" method="post">
+	<form class="form_box form_box_new" action="<%=basePath%>/AddCourse.do" method="post">
 		<div class="info_row">
 			<div class="info">
 				<div>课程ID</div>
-				<input type="text" name="courseId" placeholder="长度为3-5位的数字">
+				<input type="text" name="courseId" placeholder="请输入数字">
 				<div class="regexMsg">格式错误</div>
 			</div>
 		</div>
 		<div class="info_row">
 			<div class="info">
 				<div style="font-size: 12px">课程名称</div>
-				<input type="password" name="password" placeholder="长度为5-12位字母数字或下划线组合">
-				<div class="regexMsg">格式错误</div>
+				<input type="text" name="courseName" placeholder="请输入名称">
+				<div class="regexMsg">不能为空</div>
 			</div>
 		</div>
 		<div class="info_row">
@@ -45,20 +46,22 @@
 		</div>
 		<div class="info_row">
 			<div class="info textarea">
-				<div style="height: 48px; line-height: 48px">描&nbsp;&nbsp;&nbsp;述</div>
-				<textarea></textarea>
+				<div id="desc_div">描&nbsp;&nbsp;&nbsp;述</div>
+				<textarea name="description"></textarea>
+				<div class="regexMsg">不能为空</div>
 			</div>
 		</div>
 		<div class="info_row">
 			<div class="info">
 				<div>时&nbsp;&nbsp;&nbsp;长</div>
-				<input type="text" name="operator" id="time" placeholder="请输入仅两位小数的数字,如：2.98">
+				<input type="text" name="courseTime" id="time" placeholder="请输入仅两位小数的数字,如：2.98">
+				<div class="regexMsg">格式错误</div>
 			</div>
 		</div>
 		<div class="info_row">
 			<div class="info">
 				<div>操作人</div>
-				<input type="text" name="operator" id="operator" value="${sessionScope.loginUser}" readonly>
+				<input type="text" name="operator" id="operator" value="${sessionScope.LoginUser}" readonly>
 			</div>
 		</div>
 		<div class="info_row">

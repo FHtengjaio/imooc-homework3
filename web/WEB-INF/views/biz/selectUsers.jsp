@@ -41,7 +41,7 @@
 						<div class="bd_content">${user.password}</div>
 						<div class="bd_content">${user.type}</div>
 						<c:choose>
-							<c:when test="${user.name}=='imooc'">
+							<c:when test="${user.name!='imooc'}">
 								<div class="bd_content last"><a href="<%=basePath%>/DeleteUser.do?username=${user.name}">删除</a></div>
 							</c:when>
 							<c:otherwise>

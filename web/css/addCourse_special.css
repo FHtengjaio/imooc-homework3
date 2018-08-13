@@ -32,3 +32,6 @@ textarea{
 .btn_area_new{
     margin-top: 75px;
 }
+.info #desc_div{
+    line-height: 48px;
+}

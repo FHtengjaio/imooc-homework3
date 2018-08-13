@@ -31,16 +31,16 @@
 			<button class="button_new">课程导出</button>
 		</div>
 	</div>
-	<form>
+	<form action="<%=basePath%>/GetCourse.do" method="post" id="searchForm">
 		<div class="tool_bar">
 			<div class="size">
-				<select>
+				<select name="size" id="size">
 					<option value="5">5</option>
 					<option value="10">10</option>
 				</select>
 			</div>
 			<div class="search_box">
-				搜索<input type="search" name="title">
+				搜索<input type="search" name="title" id="searchbox">
 			</div>
 		</div>
 		<div class="tb">
@@ -53,126 +53,18 @@
 				<div class="head_content last">操作人</div>
 			</div>
 			<div class="tb_bd">
+			<c:forEach items="${allCourses}" var="course">
 				<ul>
 					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last">imooc</div>
+						<div class="bd_content">${course.id}</div>
+						<div class="bd_content">${course.name}</div>
+						<div class="bd_content">${course.direction}</div>
+						<div class="bd_content desc">${course.des}</div>
+						<div class="bd_content">${course.time}</div>
+						<div class="bd_content last">${course.operator}</div>
 					</li>
 				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content desc"></div>
-						<div class="bd_content"></div>
-						<div class="bd_content last"></div>
-					</li>
-				</ul>
+			</c:forEach>
 			</div>
 		</div>
 		<div class="tb_foot">
@@ -180,7 +72,7 @@
 			<div class="page_link">
 				<a href="#">首页</a>
 				<a href="#">上一页</a>
-				<input type="text" name="page" readonly value="1">
+				<input type="text" name="page" readonly id="page">
 				<a href="#">下一页</a>
 				<a href="#">尾页</a>
 			</div>
@@ -216,7 +108,7 @@
     $('#searchbox').on('compositionend',function(){
         flag = false;
         if(!flag){
-            $("#search").submit();
+            $("#searchForm").submit();
 		}
     });
 
@@ -225,17 +117,16 @@
         if (flag) {
             return;
         }
-        $("#search").submit();
+        $("#searchForm").submit();
     });
 
     $(document).ready(function () {
-        var val = $('#searchbox').val();
-        $('#searchbox').val("").focus().val(val);
+        $('#searchbox').focus().val(${title});
         $("select>option[value='${count}']").attr("selected","selected");
     });
 
-    $("#count").on("change", function () {
+    $("#size").on("change", function () {
         $("#page").val("1");
-        $("#search").submit();
+        $("#searchForm").submit();
     });
 </script>

@@ -62,9 +62,12 @@ public class CourseServlet extends HttpServlet {
             int defaultSize = 5;
             int currentPage = 1;
             String searchTitle = "";
-            String size = request.getParameter("recordCount");
+            String size = request.getParameter("size");
             String title = request.getParameter("title");
             String page = request.getParameter("page");
+            System.out.println(size);
+            System.out.println(title);
+            System.out.println(page);
             if (size != null && !Objects.equals("", size)) {
                     defaultSize = Integer.valueOf(size);
             }

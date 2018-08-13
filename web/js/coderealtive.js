@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var unNode = $("input[name='username']");
+    var unNode = $("input[name='courseId']");
     var passwdNode = $("input[name='password']");
 
     $("#code").click(function () {

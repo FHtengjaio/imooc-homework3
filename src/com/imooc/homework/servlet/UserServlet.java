@@ -28,19 +28,12 @@ public class UserServlet extends HttpServlet {
                     && !Objects.equals("",userName) && !Objects.equals("",password)
                     && !Objects.equals("",code) && !Objects.equals("",operator)) {
                 if (RegexUtil.isUserNameRight(userName) && RegexUtil.isPasswordRight(password)) {
-                    String sessionCode = (String) request.getSession().getAttribute("code");
-                    if (Objects.equals(sessionCode.toLowerCase(), code.toLowerCase()) && Objects.equals(operator, "imooc")) {
-                        if (!UserDaoImpl.isUserExist(userName)) {
-                            User user = new User(userName, password, "普通管理员");
-                            UserDaoImpl.addUser(user);
-                            response.sendRedirect(request.getContextPath() + "/SelectUser.do");
-                        } else {
-                            request.setAttribute("msg", "账号已经存在");
-                            request.getRequestDispatcher("/WEB-INF/views/biz/addUser.jsp").forward(request, response);
-                            return;
-                        }
+                    if (!UserDaoImpl.isUserExist(userName)) {
+                        User user = new User(userName, password, "普通管理员");
+                        UserDaoImpl.addUser(user);
+                        response.sendRedirect(request.getContextPath() + "/SelectUser.do");
                     } else {
-                        request.setAttribute("msg", "验证码错误");
+                        request.setAttribute("msg", "账号已经存在");
                         request.getRequestDispatcher("/WEB-INF/views/biz/addUser.jsp").forward(request, response);
                         return;
                     }
