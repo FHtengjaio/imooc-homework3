@@ -18,7 +18,8 @@
 <div class="main_box">
 	<div class="title">添加管理员</div>
 	<div class="error_msg">${msg}</div>
-	<form class="form_box" action="" method="post">
+	<form class="form_box" action="<%=basePath%>/AddUser.do" method="post">
+		<input type="hidden" name="operator" value="${LoginUser}">
 		<div class="info_row">
 			<div class="info">
 				<div>用户名</div>

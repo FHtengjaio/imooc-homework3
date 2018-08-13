@@ -34,62 +34,23 @@
 			<div class="head_content last">操作</div>
 		</div>
 		<div class="tb_bd">
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"><a href="#">删除</a></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content"></div>
-					<div class="bd_content last"></div>
-				</li>
-			</ul>
+			<c:forEach items="${allUsers}" var="user">
+				<ul>
+					<li>
+						<div class="bd_content">${user.name}</div>
+						<div class="bd_content">${user.password}</div>
+						<div class="bd_content">${user.type}</div>
+						<c:choose>
+							<c:when test="${user.name}=='imooc'">
+								<div class="bd_content last"><a href="<%=basePath%>/DeleteUser.do?username=${user.name}">删除</a></div>
+							</c:when>
+							<c:otherwise>
+								<div class="bd_content last">-</div>
+							</c:otherwise>
+						</c:choose>
+					</li>
+				</ul>
+			</c:forEach>
 		</div>
 	</div>
 </div>

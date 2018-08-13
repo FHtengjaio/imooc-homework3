@@ -29,3 +29,6 @@ a{
 .tb_bd::-webkit-scrollbar {
     display: none
 }
+div{
+    cursor: default;
+}

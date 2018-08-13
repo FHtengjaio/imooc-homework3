@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @WebServlet(name = "InitServlet",
-        urlPatterns = {"/TopInit.do", "/LeftInit.do", "/LoginInit", "/AddUserInit.do", "/AddCourseInit.do", "/ImportCourseInit.do"})
+        urlPatterns = { "/LoginInit", "/AddUserInit.do", "/AddCourseInit.do", "/ImportCourseInit.do"})
 public class InitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,11 +21,7 @@ public class InitServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (Objects.equals(request.getServletPath(), "/TopInit.do")) {
-            request.getRequestDispatcher("/WEB-INF/views/biz/top.jsp").forward(request, response);
-        } else if (Objects.equals(request.getServletPath(), "/LeftInit.do")) {
-            request.getRequestDispatcher("/WEB-INF/views/biz/left.jsp").forward(request, response);
-        } else if (Objects.equals("/LoginInit", request.getServletPath())) {
+        if (Objects.equals("/LoginInit", request.getServletPath())) {
             request.getSession().removeAttribute("LoginUser");
             request.getRequestDispatcher("/WEB-INF/views/biz/index.jsp").forward(request, response);
         } else if (Objects.equals("/AddUserInit.do", request.getServletPath())) {
