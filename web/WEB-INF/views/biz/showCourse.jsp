@@ -2,64 +2,193 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<base href="<%=basePath%>">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>课程查询</title>
-<!-- 分页查看 -->
-<script src="../../../js/jquery-3.3.1.js"></script>
+	<meta charset="UTF-8">
+	<title>课程查询</title>
+	<link rel="stylesheet" href="../../../css/common.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/table_common.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/showCourse_special.css" type="text/css">
+	<script src="../../../js/jquery-3.3.1.js"></script>
+	<script>
+        $(document).ready(function () {
+            $("li:odd>div").addClass("odd");
+            $("li>div").on("mouseenter mouseleave", function () {
+                $(this).parent().children("div").toggleClass("on");
+            })
+        });
+	</script>
 </head>
 <body>
-	<center>
-		<h1>课程查询</h1>
-		<hr>
-		<form action="<%=basePath%>/GetCourse.do" method="post" id="search">
-			<div style="float:left" id="count">
-				显示
-				<select name="recordCount">
-					<option value="5" selected="selected">5</option>
+<div class="header">
+	<span>课程管理</span>>><span>课程查询</span>>>
+</div>
+<div class="main_box main_box_new">
+	<div class="title">课程查询</div>
+	<div class="error_msg">
+		<div class="message">${msg}</div>
+		<div class="export_excel">
+			<button class="button_new">课程导出</button>
+		</div>
+	</div>
+	<form>
+		<div class="tool_bar">
+			<div class="size">
+				<select>
+					<option value="5">5</option>
 					<option value="10">10</option>
 				</select>
 			</div>
-			<div style="float:right; ">搜索<input type="search" name="title" id="searchbox" value="${title}"></div>
-			<input type="hidden" value="">
-		<table cellspacing="0px" cellpadding="0px" border="1px" width="100%" class="tablelist" id="example">
-			<thead>
-				<tr>
-					<th>课程ID</th>
-					<th>课程名</th>
-					<th>方向</th>
-					<th>描述</th>
-					<th>时长(小时)</th>
-					<th>操作人</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${allCourses}" var="course">
-					<tr>
-						<td>${course.id}</td>
-						<td>${course.name}</td>
-						<td>${course.direction}</td>
-						<td>${course.des}</td>
-						<td>${course.time}</td>
-						<td>${course.operator}</td>
-					</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-			<div style="float:left">查询到${searchedCount}条记录 (全部记录数${totalCount}条)</div>
-			<div style="float:right">
-				<a href="javascript:setPage(1)" id="1">第一页</a>
-				<a href="javascript:setPage(2)" id="2">上一页</a>
-				<input type="text" value="${currentPage}" name="page" style="width: 20px" id="page" readonly="readonly">
-				<a href="javascript:setPage(3)" id="3">下一页</a>
-				<a href="javascript:setPage(4)" id="4">最后一页</a>
+			<div class="search_box">
+				搜索<input type="search" name="title">
 			</div>
-			<div>${msg}</div>
-		</form>
-	</center>
+		</div>
+		<div class="tb">
+			<div class="tb_head">
+				<div class="head_content">课程ID</div>
+				<div class="head_content">课程名称</div>
+				<div class="head_content">方向</div>
+				<div class="head_content desc">描述</div>
+				<div class="head_content">时长</div>
+				<div class="head_content last">操作人</div>
+			</div>
+			<div class="tb_bd">
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last">imooc</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content desc"></div>
+						<div class="bd_content"></div>
+						<div class="bd_content last"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="tb_foot">
+			<div class="search_note">共有N条链接</div>
+			<div class="page_link">
+				<a href="#">首页</a>
+				<a href="#">上一页</a>
+				<input type="text" name="page" readonly value="1">
+				<a href="#">下一页</a>
+				<a href="#">尾页</a>
+			</div>
+		</div>
+	</form>
+</div>
 </body>
+</html>
 <script>
     function setPage(id) {
         var oPageNode = $("#page");
@@ -110,5 +239,3 @@
         $("#search").submit();
     });
 </script>
-
-</html>

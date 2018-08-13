@@ -25,9 +25,6 @@ public class LoginServlet extends HttpServlet {
                 String userName = request.getParameter("username");
                 String password = request.getParameter("password");
                 String code = request.getParameter("checkCode");
-                System.out.println(userName);
-                System.out.println(password);
-                System.out.println(code);
                 if (userName!=null && password!=null && code!=null && !Objects.equals("",userName)
                         && !Objects.equals("",password) && !Objects.equals("",code)) {
                     if (RegexUtil.isUserNameRight(userName) && RegexUtil.isPasswordRight(password)) {

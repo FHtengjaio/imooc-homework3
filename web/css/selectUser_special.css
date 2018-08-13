@@ -1,0 +1,31 @@
+.main_box_new{
+    max-width: 800px;
+    padding-bottom: 30px;
+}
+.tb{
+    margin: 117px 7% 0;
+    width: 86%;
+    position: absolute;
+    border: 1px solid grey;
+}
+
+.head_content{
+    float:left;
+    width: -webkit-calc(25% - 1px);
+    height: 100%;
+    border-right: 1px solid grey;
+    text-align: center;
+    font-weight: bold;
+}
+.bd_content{
+    float:left;
+    width: -webkit-calc(25% - 1px);
+    height: 100%;
+    border-right: 1px solid grey;
+    text-align: center;
+    border-bottom: 1px solid #dae4eb;
+}
+.last{
+    border-right: none;
+    width: -webkit-calc(25%);
+}

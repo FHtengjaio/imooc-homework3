@@ -1,0 +1,31 @@
+ul{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+li{
+    height: 25px;
+}
+a{
+    color: #4085ff;
+    text-decoration: none;
+    line-height: 25px;
+}
+.odd{
+    background-color: #fffef6;
+}
+.on{
+    background-color: #ccff99;
+}
+.tb_head{
+    width: 100%;
+    border-bottom: 1px solid grey;
+    height: 25px;
+}
+.tb_bd{
+    max-height: 260px;
+    overflow: auto;
+}
+.tb_bd::-webkit-scrollbar {
+    display: none
+}

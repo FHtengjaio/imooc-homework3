@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
         $.post("http://localhost:8080/CheckCode", param, function (data) {
             if(data === "success"){
-                $(".form_login").submit();
+                $(".form_box").submit();
             }
             else {
                 alert("验证码出错");

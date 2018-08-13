@@ -1,0 +1,34 @@
+.new{
+    margin-top: 50px;
+    height: 600px;
+}
+.title_new{
+    margin: 20px auto 0;
+}
+.error_msg_new{
+    margin-top: 60px;
+}
+.form_box_new{
+    margin: 87px auto 0;
+}
+select, textarea{
+    outline: none;
+    width: 60%;
+    margin-left: 10px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 1em;
+}
+select{
+    height: 28px;
+    line-height: 28px;
+}
+textarea{
+    height: 48px;
+}
+.textarea{
+    height: 48px;
+}
+.btn_area_new{
+    margin-top: 75px;
+}

@@ -2,64 +2,80 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<base href="<%=basePath%>">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>课程添加</title>
-<link href="../../../css/style.css" type="text/css" rel="stylesheet"/>
+	<meta charset="UTF-8">
+	<title>课程添加</title>
+	<link rel="stylesheet" href="../../../css/common.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/addCourse_special.css" type="text/css">
+	<script src="../../../js/jquery-3.3.1.js"></script>
 </head>
 <body>
-	<center>
-		<h1>课程添加</h1>
-		<div class="msg">${msg}</div>
-		<hr>
-		<form action="<%=basePath%>/AddCourse.do" method="post" >
-			<table width="400px" cellspacing="0px" cellpadding="0px" border="1px">
-				<tr>
-					<td>课程ID</td>
-					<td><input type="text" name="courseId" placeholder="请输入3-5位数字" pattern="\\d{3,5}" required="required"></td>
-				</tr>
-				<tr>
-					<td>课程名</td>
-					<td><input type="text" name="courseName" placeholder="请输入课程名"></td>
-				</tr>
-				<tr>
-					<td>方向</td>
-					<td>
-						<select name="courseType">
-							<option value="Java">Java</option>
-							<option value="前端">前端</option>
-							<option value="Linux">Linux</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>描述</td>
-					<td>
-						<textarea name="description"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>时长</td>
-					<td>
-						<input name="courseTime" type="text" placeholder="请输入只有两位小数的数字" pattern="\d+\.\\d{2}" required="required">
-					</td>
-				</tr>
-				<tr>
-					<td>操作人</td>
-					<td>
-						<input name="operator" type="text" value="${sessionScope.LoginUser}" readonly="readonly"/>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:center">
-						<input type="submit" value="添加">
-						<input type="reset" value="取消">
-					</td>
-				</tr>
-			</table>
-		</form>
-	</center>
+<div class="header">
+	<span>课程管理</span>>><span>课程添加</span>>>
+</div>
+<div class="main_box new">
+	<div class="title title_new">课程添加</div>
+	<div class="error_msg error_msg_new">${msg}</div>
+	<form class="form_box form_box_new" action="" method="post">
+		<div class="info_row">
+			<div class="info">
+				<div>课程ID</div>
+				<input type="text" name="courseId" placeholder="长度为3-5位的数字">
+				<div class="regexMsg">格式错误</div>
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info">
+				<div style="font-size: 12px">课程名称</div>
+				<input type="password" name="password" placeholder="长度为5-12位字母数字或下划线组合">
+				<div class="regexMsg">格式错误</div>
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info">
+				<div>方&nbsp;&nbsp;&nbsp;向</div>
+				<select name="courseType">
+					<option value="Java">Java</option>
+					<option value="Linux">Linux</option>
+					<option value="前端">前端</option>
+				</select>
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info textarea">
+				<div style="height: 48px; line-height: 48px">描&nbsp;&nbsp;&nbsp;述</div>
+				<textarea></textarea>
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info">
+				<div>时&nbsp;&nbsp;&nbsp;长</div>
+				<input type="text" name="operator" id="time" placeholder="请输入仅两位小数的数字,如：2.98">
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info">
+				<div>操作人</div>
+				<input type="text" name="operator" id="operator" value="${sessionScope.loginUser}" readonly>
+			</div>
+		</div>
+		<div class="info_row">
+			<div class="info code">
+				<div>验证码</div>
+				<input type="text" name="checkCode" placeholder="请输入4位验证码" id="inputCode" maxlength="4">
+			</div>
+			<div class="img_contain">
+				<img id="code" src="<%=basePath%>/VerifyCode">
+			</div>
+		</div>
+		<div class="btn_area btn_area_new">
+			<button type="button">添加</button>
+			<button type="button">取消</button>
+		</div>
+	</form>
+</div>
+
 </body>
 </html>

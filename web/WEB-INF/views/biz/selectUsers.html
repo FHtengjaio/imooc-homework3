@@ -3,107 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>查询管理员</title>
-    <style>
-        body, html{
-            padding: 0;
-            margin: 0;
-            height: 100%;
-        }
-        .header{
-            height:30px;
-            background-color: #eee;
-            line-height: 30px;
-            padding-left: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        .header span{
-            color: #4085ff;
-        }
-        .table_box{
-            max-width: 800px;
-            height: 400px;
-            background-color: #f9f9f9;
-            border-radius: 6px;
-            margin: 100px auto 0;
-            position: relative;
-            box-shadow: 0 0 5px rgba(0,0,0,.3);
-            padding-bottom: 30px;
-        }
-        .title{
-            position: absolute;
-            margin: 50px auto 0;
-            font-size: 28px;
-            text-align: center;
-            left: 0;
-            right: 0;
-        }
-        .error_msg{
-            margin-top: 90px;
-            height: 28px;
-            text-align: center;
-            line-height: 29px;
-            position: absolute;
-            width: 100%;
-            color:red;
-            font-size: 12px;
-            left: 0;
-            right: 0;
-        }
-        .tb{
-            margin: 117px 7% 0;
-            width: 86%;
-            position: absolute;
-            border: 1px solid grey;
-        }
-        .tb_head{
-            width: 100%;
-            border-bottom: 1px solid grey;
-            height: 25px;
-        }
-        .tb_bd{
-            max-height: 260px;
-            overflow: auto;
-        }
-        .head_content{
-            float:left;
-            width: -webkit-calc(25% - 1px);
-            height: 100%;
-            border-right: 1px solid grey;
-            text-align: center;
-            font-weight: bold;
-        }
-        .bd_content{
-            float:left;
-            width: -webkit-calc(25% - 1px);
-            height: 100%;
-            border-right: 1px solid grey;
-            text-align: center;
-            border-bottom: 1px solid #dae4eb;
-        }
-        .last{
-            border-right: none;
-            width: -webkit-calc(25%);
-        }
-        ul{
-            margin: 0;
-            list-style: none;
-            padding: 0;
-        }
-        li{
-            height: 25px;
-        }
-        a{
-            color: #4085ff;
-            text-decoration: none;
-            line-height: 25px;
-        }
-        .odd{
-            background-color: #fffef6;
-        }
-        .on{
-            background-color: #ccff99;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../css/common.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/table_common.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/selectUser_special.css" type="text/css">
     <script src="../../../js/jquery-3.3.1.js"></script>
     <script>
         $(document).ready(function () {
@@ -118,7 +20,7 @@
 <div class="header">
     <span>用户管理</span>>><span>查询管理员</span>>>
 </div>
-<div class="table_box">
+<div class="main_box main_box_new">
     <div class="title">查询管理员</div>
     <div class="error_msg">${msg}</div>
     <div class="tb">

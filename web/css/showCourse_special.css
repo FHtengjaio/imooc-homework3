@@ -1,0 +1,109 @@
+.main_box_new{
+    max-width: 800px;
+    height: 500px;
+    background-color: #f9f9f9;
+}
+.message{
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    text-align: center;
+    position: absolute;
+}
+.export_excel{
+    max-width: 120px;
+    margin-right:-webkit-calc(7% - 2px);
+    float: right;
+}
+.tool_bar{
+    margin: 117px 7% 0;
+    height: 25px;
+    position: absolute;
+    width: -webkit-calc(86% + 2px);
+}
+.size{
+    float:left;
+}
+.search_box{
+    float:right;
+}
+.tb{
+    margin: 145px 7% 0;
+    width: 86%;
+    position: absolute;
+    border: 1px solid grey;
+}
+.tb_head{
+    width: 100%;
+    border-bottom: 1px solid grey;
+    height: 25px;
+}
+.head_content{
+    float:left;
+    width: -webkit-calc(15% - 1px);
+    height: 100%;
+    border-right: 1px solid grey;
+    text-align: center;
+    font-weight: bold;
+}
+.bd_content{
+    float:left;
+    width: -webkit-calc(15% - 1px);
+    height: 100%;
+    border-right: 1px solid grey;
+    text-align: center;
+    border-bottom: 1px solid #dae4eb;
+}
+.last{
+    border-right: none;
+    width: -webkit-calc(15%);
+}
+.desc{
+    width: -webkit-calc(25% - 1px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+.tb_foot{
+    margin-left: 7%;
+    margin-right: 7%;
+    width: -webkit-calc(86% + 3px);
+    height: 25px;
+    bottom: 30px;
+    position: absolute;
+}
+.search_note{
+    float:left;
+}
+.page_link{
+    float:right;
+}
+select{
+    border-color: grey;
+    border-radius: 3px;
+    background: transparent;
+    outline: none;
+}
+.tool_bar input{
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: none;
+    box-shadow: 0 0 0 1000px #f9f9f9 inset;
+    font-size: 16px;
+    width: 150px;
+}
+.tb_foot input{
+    box-shadow: 0 0 0 1000px #f9f9f9 inset;
+    font-size: 16px;
+    width: 30px;
+    border: none;
+    text-align: center;
+}
+.button_new{
+    height: 100%;
+    width: 80px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.6);
+}

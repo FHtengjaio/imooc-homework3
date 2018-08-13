@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程查询</title>
+    <link rel="stylesheet" href="../../../css/common.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/table_common.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/showCourse_special.css" type="text/css">
+    <script src="../../../js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("li:odd>div").addClass("odd");
+            $("li>div").on("mouseenter mouseleave", function () {
+                $(this).parent().children("div").toggleClass("on");
+            })
+        });
+    </script>
+</head>
+<body>
+<div class="header">
+    <span>课程管理</span>>><span>课程查询</span>>>
+</div>
+<div class="main_box main_box_new">
+    <div class="title">课程查询</div>
+    <div class="error_msg">
+        <div class="message">${msg}</div>
+        <div class="export_excel">
+            <button class="button_new">课程导出</button>
+        </div>
+    </div>
+    <form>
+        <div class="tool_bar">
+            <div class="size">
+                <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="search_box">
+                搜索<input type="search" name="title">
+            </div>
+        </div>
+        <div class="tb">
+            <div class="tb_head">
+                <div class="head_content">课程ID</div>
+                <div class="head_content">课程名称</div>
+                <div class="head_content">方向</div>
+                <div class="head_content desc">描述</div>
+                <div class="head_content">时长</div>
+                <div class="head_content last">操作人</div>
+            </div>
+            <div class="tb_bd">
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last">imooc</div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content desc"></div>
+                        <div class="bd_content"></div>
+                        <div class="bd_content last"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tb_foot">
+            <div class="search_note">共有N条链接</div>
+            <div class="page_link">
+                <a href="#">首页</a>
+                <a href="#">上一页</a>
+                <input type="text" name="page" readonly value="1">
+                <a href="#">下一页</a>
+                <a href="#">尾页</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

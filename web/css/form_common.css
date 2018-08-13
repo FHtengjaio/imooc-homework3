@@ -1,0 +1,73 @@
+.form_box{
+    margin: 117px auto 0;
+    width: 86%;
+    position: absolute;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+.info_row{
+    margin-bottom: 10px;
+}
+.info:hover{
+    border: #4a98ff 2px solid;
+    padding: 9px;
+}
+.info{
+    height: 28px;
+    padding: 10px;
+    border: 1px solid #dae4eb;
+}
+.info div:first-child{
+    font-size: 1em;
+    height: 28px;
+    width: 50px;
+    float: left;
+    text-align: right;
+    line-height: 28px;
+}
+.info input{
+    width: 60%;
+    margin-left: 10px;
+    outline: none;
+    box-shadow: 0 0 0 1000px #f9f9f9 inset;
+    height: 28px;
+    font-size: 1em;
+    border-style: none;
+    padding: 0;
+    background: transparent;
+    line-height: 28px;
+}
+.btn_area{
+    margin-top: 95px;
+    height: 50px;
+}
+#inputCode{
+    float:left;
+    width: 70%;
+}
+.btn_area button:last-child{
+    float:right;
+}
+
+.regexError{
+    border: red 2px solid;
+    padding: 9px;
+}
+
+.regexMsg{
+    color: red;
+    font-size: 12px;
+    display:none;
+    float:right;
+    height:27px;
+    line-height: 27px;
+}
+.img_contain{
+    float:right;
+    height: 48px;
+    border: 1px solid #dae4eb;
+}
+.code{
+    width: 60%;
+    float:left;
+}

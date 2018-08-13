@@ -1,0 +1,58 @@
+body,html{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+.main_box{
+    max-width: 400px;
+    height: 400px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    margin: 100px auto 20px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+.title{
+    position: absolute;
+    margin: 50px auto 0;
+    font-size: 28px;
+    text-align: center;
+    width: 100%;
+}
+.error_msg{
+    margin-top: 90px;
+    height: 28px;
+    text-align: center;
+    line-height: 29px;
+    position: absolute;
+    width: 100%;
+    color:red;
+    font-size: 12px;
+}
+button{
+    border-radius: 6px;
+    outline: none;
+    height: 100%;
+    width: 40%;
+    background-color: #4085ff;
+    cursor: pointer;
+    border-style: none;
+    color: #fff;
+}
+input::-webkit-input-placeholder {
+    color: #aab2bd;
+    font-size: 12px;
+}
+button:active{
+    background-color: #1808ff;
+}
+.header{
+    height:30px;
+    background-color: #eee;
+    line-height: 30px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.header span{
+    color: #4085ff;
+}
