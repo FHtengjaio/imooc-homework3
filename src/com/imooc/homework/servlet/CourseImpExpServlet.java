@@ -40,9 +40,9 @@ public class CourseImpExpServlet extends HttpServlet {
                     String str = CourseDaoImpl.addCourses(courses);
                     request.setAttribute("msg", str);
                 } catch (InvalidFormatException e) {
-                    request.setAttribute("msg", "你传入的是excel吗？");
+                    request.setAttribute("msg", "你上传的是excel吗？");
                 }catch (IllegalStateException e) {
-                    request.setAttribute("msg", "你传入的excel格式不对!");
+                    request.setAttribute("msg", "你上传的excel格式不对!");
                 } finally {
                     request.getRequestDispatcher("/GetCourse.do").forward(request, response);
                 }

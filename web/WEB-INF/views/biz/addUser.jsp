@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
 	<title>添加用户</title>
@@ -11,7 +11,6 @@
 	<script src="../../../js/jquery-3.3.1.js"></script>
 	<script src="../../../js/coderealtive.js"></script>
 	<script src="../../../js/buttonevent.js"></script>
-	<%--<script src="../../../js/addUser.js"></script>--%>
 </head>
 <body>
 <div class="header">

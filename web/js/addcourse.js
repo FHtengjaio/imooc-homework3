@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
         $.post("http://localhost:8080/CheckCode", param, function (data) {
             if(data === "success"){
-                $(".form_box").submit();
+                sendrequest();
             }
             else {
                 alert("验证码出错");
@@ -42,6 +42,27 @@ $(document).ready(function () {
                 $("#inputCode").focus();
             }
         })
+    }
+
+    function sendrequest(){
+        $.getJSON(
+            "http://localhost:8080/AddCourse.do",
+            {
+                courseId: idNode.val(),
+                courseName: nameNode.val(),
+                courseType: $("select").val(),
+                description: descNode.val(),
+                courseTime: timeNode.val()
+            },
+            function (res) {
+                $(".error_msg").html(res.msg);
+                if (res.result === "success") {
+                    location.assign("http://localhost:8080/GetCourse.do");
+                    $(window.parent.document).find("a:eq(2)").removeClass("on");
+                    $(window.parent.document).find("a:eq(4)").addClass("on");
+                }
+            }
+        );
     }
 
     idNode.on("blur", {node:idNode, regex:/^\d{3,}$/}, checkelement);

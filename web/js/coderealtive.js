@@ -63,6 +63,7 @@ $(document).ready(function () {
                     location.assign("http://localhost:8080/SelectUser.do");
                     $(window.parent.document).find("a:first").removeClass("on");
                     $(window.parent.document).find("a:eq(1)").addClass("on");
+                } else {
                     $("#code").click();
                 }
             });

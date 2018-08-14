@@ -35,6 +35,7 @@ public class CourseServlet extends HttpServlet {
             String courseTime = request.getParameter("courseTime");
             //操作人需要跟登录人一致，页面提交的数据有可能被篡改
             String operator = (String) request.getSession().getAttribute("LoginUser");
+            JSONObject jsonObject = new JSONObject();
             if (courseId != null && courseName != null && courseType != null
                     && description != null && courseTime != null && operator != null
                     && !Objects.equals(courseId, "") && !Objects.equals(courseName, "")
@@ -45,19 +46,21 @@ public class CourseServlet extends HttpServlet {
                         Course course = new Course(Long.valueOf(courseId), StringUtil.trim(courseName), StringUtil.trim(courseType),
                                 StringUtil.trim(description), Double.valueOf(courseTime), StringUtil.trim(operator));
                         CourseDaoImpl.addCourse(course);
-                        response.sendRedirect(request.getContextPath() + "/GetCourse.do");
+                        jsonObject.put("msg", null);
+                        jsonObject.put("result", "success");
+                        response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));
                     } else {
-                        request.setAttribute("msg", "课程编号已经存在");
-                        request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
-                    }
+                        jsonObject.put("msg", "课程编号已经存在");
+                        jsonObject.put("result", "fail");
+                        response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));                    }
                 } else {
-                    request.setAttribute("msg", "请填写格式正确的id和时长");
-                    request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
-                }
+                    jsonObject.put("msg", "请填写格式正确的id和时长");
+                    jsonObject.put("result", "fail");
+                    response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));                 }
             } else {
-                request.setAttribute("msg", "请填写所有字段");
-                request.getRequestDispatcher("/WEB-INF/views/biz/addCourse.jsp").forward(request, response);
-            }
+                jsonObject.put("msg", "请填写所有字段");
+                jsonObject.put("result", "fail");
+                response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));              }
         } else if(Objects.equals("/GetCourse.do", request.getServletPath())){
             int defaultSize = 5;
             int currentPage = 1;
