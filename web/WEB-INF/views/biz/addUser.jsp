@@ -11,6 +11,7 @@
 	<script src="../../../js/jquery-3.3.1.js"></script>
 	<script src="../../../js/coderealtive.js"></script>
 	<script src="../../../js/buttonevent.js"></script>
+	<%--<script src="../../../js/addUser.js"></script>--%>
 </head>
 <body>
 <div class="header">

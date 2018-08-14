@@ -38,8 +38,7 @@ $(document).ready(function () {
         var param = {code:vCode};
         $.post("http://localhost:8080/CheckCode", param, function (data) {
             if(data === "success"){
-                //验证码通过后，发起添加user请求
-                sendrequest();
+                $(".form_box").submit();
             }
             else {
                 alert("验证码出错");
@@ -49,24 +48,6 @@ $(document).ready(function () {
         })
     }
 
-    function sendrequest(){
-        $.getJSON(
-            "http://localhost:8080/AddUser.do",
-            {
-                username:$("input[name='username']").val(),
-                password:$("input[name='password']").val(),
-                operator:$("input[name='operator']").val()
-            },
-            function (res) {
-                $(".error_msg").html(res.msg);
-                if (res.result === "success") {
-                    location.assign("http://localhost:8080/SelectUser.do");
-                    $(window.parent.document).find("a:first").removeClass("on");
-                    $(window.parent.document).find("a:eq(1)").addClass("on");
-                    $("#code").click();
-                }
-            });
-    }
 
     unNode.on("blur", {node:unNode, regex:/^[a-zA-Z0-9_]{3,12}$/}, checkelement);
     unNode.on("focus", function () { $(this).parent().removeClass("regexError");$(this).next().hide(); });

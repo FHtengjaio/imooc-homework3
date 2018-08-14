@@ -11,14 +11,14 @@ public class CourseDao {
     static {
         courseMap.put(101L,new Course(101L,"java之JVM","java","很好1",300.00,"imooc"));
         courseMap.put(102L,new Course(102L,"html入门","前端","很好2",100.00,"imooc"));
-        courseMap.put(103L,new Course(103L,"css入门","前端","很好3",200.00,"imooc"));
+        courseMap.put(103L,new Course(103L,"css入门","前端","很好3",200.50,"imooc"));
         courseMap.put(104L,new Course(104L,"javascript入门","前端","很好44",90.00,"imooc"));
         courseMap.put(105L,new Course(105L,"Linux入门","Linux","很好77",100.00,"imooc"));
         courseMap.put(106L,new Course(106L,"c#入门","C#","很好555",89.00,"imooc"));
-        courseMap.put(107L,new Course(107L,"javaWeb","java","很好很好",230.00,"imooc"));
+        courseMap.put(107L,new Course(107L,"javaWeb","java","很好很好",230.50,"imooc"));
         courseMap.put(108L,new Course(108L,"java入门","java","很好的神色",309.00,"imooc"));
         courseMap.put(109L,new Course(109L,"java内存","java","很好的双方各",320.00,"imooc"));
-        courseMap.put(110L,new Course(110L,"java基础","java","很好34433",123.00,"imooc"));
+        courseMap.put(110L,new Course(110L,"java基础","java","很好34433",123.30,"imooc"));
         courseMap.put(111L,new Course(111L,"Linux脚本","Linux","很好 查询",334.00,"imooc"));
     }
 

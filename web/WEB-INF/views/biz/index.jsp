@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../../../css/common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
-	<script src="../../../js/coderealtive.js"></script>
+	<script src="../../../js/login.js"></script>
 	<script src="../../../js/buttonevent.js"></script>
 </head>
 <body >

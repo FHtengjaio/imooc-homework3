@@ -14,7 +14,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        Object loginUser = request.getSession().getAttribute("LoginUser");
+        Object loginUser = request.getSession(false).getAttribute("LoginUser");
         if (loginUser == null) {
             request.setAttribute("msg","请登录后操作");
             request.getRequestDispatcher("/LoginInit").forward(request, response);

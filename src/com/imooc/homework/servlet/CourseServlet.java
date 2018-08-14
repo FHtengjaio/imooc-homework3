@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @WebServlet(name = "CourseServlet", urlPatterns = {"/AddCourse.do", "/GetCourse.do"})
 public class CourseServlet extends HttpServlet {
@@ -82,22 +81,30 @@ public class CourseServlet extends HttpServlet {
 
             String ajaxHeader = request.getHeader("x-requested-with");
             if (ajaxHeader != null && Objects.equals(ajaxHeader.toLowerCase(), "XMLHttpRequest".toLowerCase())) {
+                List<Map<String,String>> courseJSON = new ArrayList<>();
+                for (Course c : courses) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("id", c.getId()+"");
+                    map.put("name", c.getName());
+                    map.put("direction", c.getDirection());
+                    map.put("des", c.getDes());
+                    map.put("time", c.getTime()+"");
+                    map.put("operator", c.getOperator());
+                    courseJSON.add(map);
+                }
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("allCourses", courses);
+                jsonObject.put("allCourses", courseJSON);
                 jsonObject.put("searchedCount", searchedCount);
                 jsonObject.put("totalCount", CourseDaoImpl.getAllCourses().size());
                 jsonObject.put("totalPage", totalPage);
-
+                System.out.println(jsonObject.toString());
                 response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));
             } else {
                 request.setAttribute("msg", request.getAttribute("msg"));  //导入课程时才会有此message
                 request.setAttribute("searchedCount",searchedCount);    //设置所有关键字符合的数量
-                request.setAttribute("currentPage",currentPage);       //设置当前的页面编号
                 request.setAttribute("totalCount", CourseDaoImpl.getAllCourses().size());
                 request.setAttribute("totalPage", totalPage);
-                request.setAttribute("title", searchTitle);
                 request.setAttribute("allCourses", courses);
-                request.setAttribute("count", defaultSize);
                 request.getRequestDispatcher("/WEB-INF/views/biz/showCourse.jsp").forward(request, response);
             }
 
