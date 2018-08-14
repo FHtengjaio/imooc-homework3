@@ -10,14 +10,7 @@
 	<link rel="stylesheet" href="../../../css/table_common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/showCourse_special.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
-	<script>
-        $(document).ready(function () {
-            $("li:odd>div").addClass("odd");
-            $("li>div").on("mouseenter mouseleave", function () {
-                $(this).parent().children("div").toggleClass("on");
-            })
-        });
-	</script>
+	<script src="../../../js/showcourses.js"></script>
 </head>
 <body>
 <div class="header">
@@ -28,6 +21,7 @@
 	<div class="error_msg">
 		<div class="message">${msg}</div>
 		<div class="export_excel">
+			<a href="<%=basePath%>/CourseExport.do?title=" style="display: none" id="a_exp_excel"></a>
 			<button class="button_new">课程导出</button>
 		</div>
 	</div>
@@ -37,6 +31,7 @@
 				<select name="size" id="size">
 					<option value="5">5</option>
 					<option value="10">10</option>
+					<option value="15">15</option>
 				</select>
 			</div>
 			<div class="search_box">
@@ -68,65 +63,19 @@
 			</div>
 		</div>
 		<div class="tb_foot">
-			<div class="search_note">共有N条链接</div>
+			<div class="search_note">
+				搜索到<span id="searchedCount">${searchedCount}</span>条数据,
+				共有<span id="totalCount">${totalCount}</span>条数据
+			</div>
 			<div class="page_link">
-				<a href="#">首页</a>
-				<a href="#">上一页</a>
-				<input type="text" name="page" readonly id="page">
-				<a href="#">下一页</a>
-				<a href="#">尾页</a>
+				<a href="javascript:void(0);" data-id="1">首页</a>
+				<a href="javascript:void(0);" data-id="">上一页</a>
+				<input type="text" name="page" readonly id="page" value="1">
+				<a href="javascript:void(0);" data-id="">下一页</a>
+				<a href="javascript:void(0);" data-id="${totalPage}" id="last_a">尾页</a>
 			</div>
 		</div>
 	</form>
 </div>
 </body>
 </html>
-<script>
-    function setPage(id) {
-        var oPageNode = $("#page");
-        if (id === 1) {
-            oPageNode.val(1);
-        }else if (id === 2) {
-            if (oPageNode.val() > 1) {
-                oPageNode.val(oPageNode.val()-1);
-            }
-        }else if (id === 3) {
-            if (oPageNode.val() < ${totalPage}) {
-                oPageNode.val(parseInt(oPageNode.val())+1);
-            }
-        }else if (id === 4) {
-            oPageNode.val(${totalPage});
-        }
-        $("#search").submit();
-    }
-
-    var flag = false;
-    $('#searchbox').on('compositionstart',function(){
-        flag = true;
-    });
-
-    $('#searchbox').on('compositionend',function(){
-        flag = false;
-        if(!flag){
-            $("#searchForm").submit();
-		}
-    });
-
-    $('#searchbox').on('input propertychange', function() {
-        console.log(flag);
-        if (flag) {
-            return;
-        }
-        $("#searchForm").submit();
-    });
-
-    $(document).ready(function () {
-        $('#searchbox').focus().val(${title});
-        $("select>option[value='${count}']").attr("selected","selected");
-    });
-
-    $("#size").on("change", function () {
-        $("#page").val("1");
-        $("#searchForm").submit();
-    });
-</script>

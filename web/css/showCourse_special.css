@@ -60,10 +60,6 @@
 }
 .desc{
     width: -webkit-calc(25% - 1px);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    cursor: default;
 }
 .tb_foot{
     margin-left: 7%;

@@ -34,7 +34,7 @@
 <div class="main_box">
 	<div class="title">课程批量导入</div>
 	<div class="error_msg">${msg}</div>
-	<form class="form_box" action="" method="post" enctype="multipart/form-data" id="excel_form">
+	<form class="form_box" action="<%=basePath%>/CourseImport.do" method="post" enctype="multipart/form-data" id="excel_form">
 		<input type="file" style="display: none" id="excel" name="excel">
 		<div class="file_btn">
 			<button type="button"></button>

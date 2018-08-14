@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/addCourse_special.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
-	<script src="../../../js/adduser.js"></script>
+	<script src="../../../js/addcourse.js"></script>
+	<script src="../../../js/buttonevent.js"></script>
 </head>
 <body>
 <div class="header">

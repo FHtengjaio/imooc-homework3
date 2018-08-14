@@ -1,14 +1,14 @@
 package com.imooc.homework.data;
 
 public class Course {
-    private String id;
+    private long id;
     private String name;
     private String direction;
     private String des;
     private double time;
     private String operator;
 
-    public Course(String id, String name, String direction, String des, double time, String operator) {
+    public Course(long id, String name, String direction, String des, double time, String operator) {
         this.id = id;
         this.name = name;
         this.direction = direction;
@@ -19,11 +19,11 @@ public class Course {
 
     public Course() {}
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

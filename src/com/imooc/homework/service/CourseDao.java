@@ -6,24 +6,24 @@ import java.util.*;
 
 public class CourseDao {
 
-    private static final Map<String, Course> courseMap = new HashMap<>();
+    private static final Map<Long, Course> courseMap = new HashMap<>();
 
     static {
-        courseMap.put("101",new Course("101","java之JVM","java","很好1",300.00,"imooc"));
-        courseMap.put("102",new Course("102","html入门","前端","很好2",100.00,"imooc"));
-        courseMap.put("103",new Course("103","css入门","前端","很好3",200.00,"imooc"));
-        courseMap.put("104",new Course("104","javascript入门","前端","很好44",90.00,"imooc"));
-        courseMap.put("105",new Course("105","Linux入门","Linux","很好77",100.00,"imooc"));
-        courseMap.put("106",new Course("106","c#入门","C#","很好555",89.00,"imooc"));
-        courseMap.put("107",new Course("107","javaWeb","java","很好很好",230.00,"imooc"));
-        courseMap.put("108",new Course("108","java入门","java","很好的神色",309.00,"imooc"));
-        courseMap.put("109",new Course("109","java内存","java","很好的双方各",320.00,"imooc"));
-        courseMap.put("110",new Course("110","java基础","java","很好34433",123.00,"imooc"));
-        courseMap.put("111",new Course("111","Linux脚本","Linux","很好 查询",334.00,"imooc"));
+        courseMap.put(101L,new Course(101L,"java之JVM","java","很好1",300.00,"imooc"));
+        courseMap.put(102L,new Course(102L,"html入门","前端","很好2",100.00,"imooc"));
+        courseMap.put(103L,new Course(103L,"css入门","前端","很好3",200.00,"imooc"));
+        courseMap.put(104L,new Course(104L,"javascript入门","前端","很好44",90.00,"imooc"));
+        courseMap.put(105L,new Course(105L,"Linux入门","Linux","很好77",100.00,"imooc"));
+        courseMap.put(106L,new Course(106L,"c#入门","C#","很好555",89.00,"imooc"));
+        courseMap.put(107L,new Course(107L,"javaWeb","java","很好很好",230.00,"imooc"));
+        courseMap.put(108L,new Course(108L,"java入门","java","很好的神色",309.00,"imooc"));
+        courseMap.put(109L,new Course(109L,"java内存","java","很好的双方各",320.00,"imooc"));
+        courseMap.put(110L,new Course(110L,"java基础","java","很好34433",123.00,"imooc"));
+        courseMap.put(111L,new Course(111L,"Linux脚本","Linux","很好 查询",334.00,"imooc"));
     }
 
 
-    public boolean isCourseExist(String id) {
+    public boolean isCourseExist(long id) {
         return courseMap.containsKey(id);
     }
 
@@ -57,7 +57,7 @@ public class CourseDao {
             list.addAll(courseMap.values());
         } else {
             for (Course course : courseMap.values()) {
-                if (Objects.equals(course.getId(), title)) {
+                if (Objects.equals(String.valueOf(course.getId()), title)) {
                     list.add(course);
                     break;
                 } else if (course.getName().contains(title)) {

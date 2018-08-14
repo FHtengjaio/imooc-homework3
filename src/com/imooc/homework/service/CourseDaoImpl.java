@@ -7,7 +7,7 @@ import java.util.List;
 public class CourseDaoImpl {
     private static final CourseDao courseDao = new CourseDao();
 
-    public static boolean isCourseExist(String id) {
+    public static boolean isCourseExist(long id) {
         return courseDao.isCourseExist(id);
     }
 

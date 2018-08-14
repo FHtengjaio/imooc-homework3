@@ -25,13 +25,13 @@ public class LoginServlet extends HttpServlet {
                 String userName = request.getParameter("username");
                 String password = request.getParameter("password");
                 String code = request.getParameter("checkCode");
-                if (userName!=null && password!=null && code!=null && !Objects.equals("",userName)
-                        && !Objects.equals("",password) && !Objects.equals("",code)) {
+                if (userName != null && password != null && code != null && !Objects.equals("", userName)
+                        && !Objects.equals("", password) && !Objects.equals("", code)) {
                     if (RegexUtil.isUserNameRight(userName) && RegexUtil.isPasswordRight(password)) {
                         if (UserDaoImpl.login(userName, password)) {
-                                request.getSession().setAttribute("LoginUser", userName);
-                                request.getRequestDispatcher("/WEB-INF/views/biz/server.jsp").forward(request, response);
-                            } else {
+                            request.getSession().setAttribute("LoginUser", userName);
+                            request.getRequestDispatcher("/WEB-INF/views/biz/server.jsp").forward(request, response);
+                        } else {
                             request.setAttribute("msg", "账号密码错误");
                             request.getRequestDispatcher("/WEB-INF/views/biz/index.jsp").forward(request, response);
                         }

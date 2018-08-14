@@ -11,26 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExcelTool {
-    public static List<Course> readExcel(FileItem fileItem, String operator) {
+    public static List<Course> readExcel(FileItem fileItem, String operator) throws IOException, InvalidFormatException {
         List<Course> list = new ArrayList<>();
-        try {
-            Workbook book = WorkbookFactory.create(fileItem.getInputStream());
-            Sheet sheet = book.getSheetAt(0);
-            int rows = sheet.getLastRowNum();
-            for (int i = 1; i <= rows; i++) {
-                Row row = sheet.getRow(i);
-                String id = (int)row.getCell(0).getNumericCellValue()+"";
-                String name = row.getCell(1).getStringCellValue();
-                String direction = row.getCell(2).getStringCellValue();
-                String des = row.getCell(3).getStringCellValue();
-                double time = row.getCell(4).getNumericCellValue();
-                Course course = new Course(id, name, direction, des, time, operator);
-                list.add(course);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
+        Workbook book = WorkbookFactory.create(fileItem.getInputStream());
+        Sheet sheet = book.getSheetAt(0);
+        int rows = sheet.getLastRowNum();
+        for (int i = 1; i <= rows; i++) {
+            Row row = sheet.getRow(i);
+            long id = (long) row.getCell(0).getNumericCellValue();
+            String name = row.getCell(1).getStringCellValue();
+            String direction = row.getCell(2).getStringCellValue();
+            String des = row.getCell(3).getStringCellValue();
+            double time = row.getCell(4).getNumericCellValue();
+            System.out.println(time);
+            Course course = new Course(id, name, direction, des, time, operator);
+            list.add(course);
         }
         return list;
     }

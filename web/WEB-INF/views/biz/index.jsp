@@ -7,10 +7,11 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>登录页面</title>
-<link rel="stylesheet" href="../../../css/common.css" type="text/css">
-<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
-<script src="../../../js/jquery-3.3.1.js"></script>
-<script src="../../../js/coderealtive.js"></script>
+	<link rel="stylesheet" href="../../../css/common.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
+	<script src="../../../js/jquery-3.3.1.js"></script>
+	<script src="../../../js/coderealtive.js"></script>
+	<script src="../../../js/buttonevent.js"></script>
 </head>
 <body >
 <div class="main_box">

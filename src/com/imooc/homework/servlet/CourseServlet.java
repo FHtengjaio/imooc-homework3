@@ -4,6 +4,7 @@ import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
 import com.imooc.homework.utils.RegexUtil;
 import com.imooc.homework.utils.StringUtil;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,8 +42,8 @@ public class CourseServlet extends HttpServlet {
                     && !Objects.equals(courseType, "") && !Objects.equals(description, "")
                     && !Objects.equals(courseTime, "") && !Objects.equals(operator, "")) {
                 if (RegexUtil.isCourseIdRight(courseId) && RegexUtil.isTimeRight(courseTime)) {
-                    if (!CourseDaoImpl.isCourseExist(courseId)) {
-                        Course course = new Course(courseId, StringUtil.trim(courseName), StringUtil.trim(courseType),
+                    if (!CourseDaoImpl.isCourseExist(Long.valueOf(courseId))) {
+                        Course course = new Course(Long.valueOf(courseId), StringUtil.trim(courseName), StringUtil.trim(courseType),
                                 StringUtil.trim(description), Double.valueOf(courseTime), StringUtil.trim(operator));
                         CourseDaoImpl.addCourse(course);
                         response.sendRedirect(request.getContextPath() + "/GetCourse.do");
@@ -65,9 +66,6 @@ public class CourseServlet extends HttpServlet {
             String size = request.getParameter("size");
             String title = request.getParameter("title");
             String page = request.getParameter("page");
-            System.out.println(size);
-            System.out.println(title);
-            System.out.println(page);
             if (size != null && !Objects.equals("", size)) {
                     defaultSize = Integer.valueOf(size);
             }
@@ -82,21 +80,27 @@ public class CourseServlet extends HttpServlet {
             int totalPage = searchedCount % defaultSize > 0 ? searchedCount / defaultSize + 1 : searchedCount / defaultSize;
             List<Course> courses = CourseDaoImpl.getCourses(searchTitle, defaultSize, currentPage);
 
+            String ajaxHeader = request.getHeader("x-requested-with");
+            if (ajaxHeader != null && Objects.equals(ajaxHeader.toLowerCase(), "XMLHttpRequest".toLowerCase())) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("allCourses", courses);
+                jsonObject.put("searchedCount", searchedCount);
+                jsonObject.put("totalCount", CourseDaoImpl.getAllCourses().size());
+                jsonObject.put("totalPage", totalPage);
 
+                response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));
+            } else {
+                request.setAttribute("msg", request.getAttribute("msg"));  //导入课程时才会有此message
+                request.setAttribute("searchedCount",searchedCount);    //设置所有关键字符合的数量
+                request.setAttribute("currentPage",currentPage);       //设置当前的页面编号
+                request.setAttribute("totalCount", CourseDaoImpl.getAllCourses().size());
+                request.setAttribute("totalPage", totalPage);
+                request.setAttribute("title", searchTitle);
+                request.setAttribute("allCourses", courses);
+                request.setAttribute("count", defaultSize);
+                request.getRequestDispatcher("/WEB-INF/views/biz/showCourse.jsp").forward(request, response);
+            }
 
-            request.getSession().setAttribute("size", defaultSize);
-            request.getSession().setAttribute("page", currentPage);
-            request.getSession().setAttribute("title", searchTitle);
-
-            request.setAttribute("msg", request.getAttribute("msg"));  //导入课程时才会有此message
-            request.setAttribute("searchedCount",searchedCount);    //设置所有关键字符合的数量
-            request.setAttribute("currentPage",currentPage);       //设置当前的页面编号
-            request.setAttribute("totalCount", CourseDaoImpl.getAllCourses().size());
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("title", searchTitle);
-            request.setAttribute("allCourses", courses);
-            request.setAttribute("count", defaultSize);
-            request.getRequestDispatcher("/WEB-INF/views/biz/showCourse.jsp").forward(request, response);
         }
     }
 }

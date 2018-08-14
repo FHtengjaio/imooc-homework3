@@ -30,10 +30,12 @@
 		<div class="control_box">
 			<div class="control_content">
 				<span>用户管理</span>
+				<c:if test="${LoginUser=='imooc'}">
 				<ul>
 					<li><a href="<%=basePath%>/AddUserInit.do" target="main">添加管理员</a></li>
 					<li><a href="<%=basePath%>/SelectUser.do" target="main">查询管理员</a></li>
 				</ul>
+				</c:if>
 			</div>
 			<div class="control_content">
 				<span>课程管理</span>
