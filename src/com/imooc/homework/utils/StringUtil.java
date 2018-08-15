@@ -1,6 +1,9 @@
 package com.imooc.homework.utils;
 
 public class StringUtil {
+    /**
+     * String类中的trim()无法除去中文的空格，此方法提供去除中文空格
+     * */
     public static String trim(String sourceString) {
         if (sourceString == null) {
             throw new NullPointerException("你提供的字符串是null值");

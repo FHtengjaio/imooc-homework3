@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @WebServlet(name = "InitServlet",
-        urlPatterns = { "/index", "/AddUserInit.do", "/AddCourseInit.do", "/ImportCourseInit.do","/Home"})
+        urlPatterns = { "/index", "/AddUserInit.do", "/AddCourseInit.do", "/ImportCourseInit.do", "/Home"})
 public class InitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -19,6 +19,9 @@ public class InitServlet extends HttpServlet {
 
     }
 
+    /*
+    * 处理页面初始化跳转的servlet
+    * */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (Objects.equals("/index", request.getServletPath())) {

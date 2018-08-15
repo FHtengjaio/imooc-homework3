@@ -21,7 +21,7 @@
 <div class="main_box new">
 	<div class="title title_new">课程添加</div>
 	<div class="error_msg error_msg_new">${msg}</div>
-	<form class="form_box form_box_new" action="<%=basePath%>/AddCourse.do" method="post">
+	<div class="form_box form_box_new">
 		<div class="info_row">
 			<div class="info">
 				<div>课程ID</div>
@@ -79,7 +79,7 @@
 			<button type="button">添加</button>
 			<button type="button">取消</button>
 		</div>
-	</form>
+	</div>
 </div>
 
 </body>

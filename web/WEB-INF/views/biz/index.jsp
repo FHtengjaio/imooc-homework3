@@ -18,7 +18,7 @@
 <div class="main_box">
 	<div class="title">账号登录</div>
 	<div class="error_msg">${msg}</div>
-	<form class="form_box" action="<%=basePath%>/Login" method="post">
+	<div class="form_box">
 		<div class="info_row">
 			<div class="info">
 				<div>用户名</div>
@@ -46,7 +46,7 @@
 			<button type="button">登录</button>
 			<button type="button">取消</button>
 		</div>
-	</form>
+	</div>
 </div>
 </body>
 <script>

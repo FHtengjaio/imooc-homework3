@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    //解决session过期时，只会在iframe中跳转页面的问题
+    if (window !== top)
+        top.location.href = location.href;
+
     //获取username，password对象
     var unNode = $("input[name='username']");
     var passwdNode = $("input[name='password']");

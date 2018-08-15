@@ -26,7 +26,7 @@
 			<button class="button_new">课程导出</button>
 		</div>
 	</div>
-	<form action="<%=basePath%>/GetCourse.do" method="post" id="searchForm">
+	<%--<form action="<%=basePath%>/GetCourse.do" method="post" id="searchForm">--%>
 		<div class="tool_bar">
 			<div class="size">
 				<select name="size" id="size">
@@ -76,7 +76,7 @@
 				<a href="javascript:void(0);" data-id="${totalPage}" id="last_a">尾页</a>
 			</div>
 		</div>
-	</form>
+	<%--</form>--%>
 </div>
 </body>
 </html>

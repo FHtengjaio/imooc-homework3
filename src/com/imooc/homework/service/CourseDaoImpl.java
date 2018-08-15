@@ -5,6 +5,9 @@ import com.imooc.homework.data.Course;
 import java.util.List;
 
 public class CourseDaoImpl {
+    /*
+    * 此类中的方法完全调用CourseDao中的方法
+    * */
     private static final CourseDao courseDao = new CourseDao();
 
     public static boolean isCourseExist(long id) {

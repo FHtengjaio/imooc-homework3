@@ -6,6 +6,10 @@ import java.util.List;
 
 public class UserDaoImpl {
 
+    /*
+    * 此类中的方法完全调用UserDao中的方法
+    * */
+
     private static final UserDao courseDao = new UserDao();
 
     public static boolean login(String userName, String password) {

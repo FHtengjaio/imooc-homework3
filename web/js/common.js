@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //设置ajax访问每次判断session是否过期
     $.ajaxSetup({
         complete: function(xhr,status) {
             var sessionStatus = xhr.getResponseHeader('sessionstatus');
