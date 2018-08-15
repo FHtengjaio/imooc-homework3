@@ -11,7 +11,7 @@
     position: absolute;
 }
 .export_excel{
-    max-width: 120px;
+    width: 100px;
     margin-right:-webkit-calc(7% - 2px);
     float: right;
 }

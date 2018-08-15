@@ -4,6 +4,7 @@ import com.imooc.homework.data.Course;
 import com.imooc.homework.service.CourseDaoImpl;
 import com.imooc.homework.utils.ExcelTool;
 import com.imooc.homework.utils.RequestParser;
+import net.sf.json.JSONObject;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -33,18 +34,28 @@ public class CourseImpExpServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (Objects.equals("/CourseImport.do", request.getServletPath())) {
             FileItem fileItem = RequestParser.getExcel(request);
+            JSONObject jsonObject = new JSONObject();
+            String res = null;
+            String message = null;
             if (fileItem != null) {
                 List<Course> courses = null;
                 try {
                     courses = ExcelTool.readExcel(fileItem, (String) request.getSession().getAttribute("LoginUser"));
-                    String str = CourseDaoImpl.addCourses(courses);
-                    request.setAttribute("msg", str);
+                    message = CourseDaoImpl.addCourses(courses);
+                    res = "success";
                 } catch (InvalidFormatException e) {
-                    request.setAttribute("msg", "你上传的是excel吗？");
-                }catch (IllegalStateException e) {
-                    request.setAttribute("msg", "你上传的excel格式不对!");
+                    message = "您上传的是excel吗？";
+                    res = "fail";
+                } catch (IllegalStateException e) {
+                    message = "您上传的excel，单元格格式不匹配!";
+                    res = "fail";
+                } catch (Exception e){
+                    message = "抱歉，您上传的文件不匹配!";
+                    res = "fail";
                 } finally {
-                    request.getRequestDispatcher("/GetCourse.do").forward(request, response);
+                    jsonObject.put("result", res);
+                    jsonObject.put("msg", message);
+                    response.getOutputStream().write(jsonObject.toString().getBytes("utf-8"));
                 }
             } else {
                 request.setAttribute("msg", "请选择xls文件");

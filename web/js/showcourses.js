@@ -2,6 +2,10 @@ $(document).ready(function () {
 
     tablestyle();
 
+    var msg = localStorage.getItem("msg");
+    $(".message").html(msg);
+    localStorage.removeItem("msg");
+
     var flag = false;
     $('#searchbox').on('compositionstart',function(){
         flag = true;
@@ -29,9 +33,9 @@ $(document).ready(function () {
     });
 
     var fpNode = $(".tb_foot a:first");
-    var lpNode = $(".tb_foot a:last");
     var spNode = $(".tb_foot a:eq(1)");
     var tpNode = $(".tb_foot a:eq(2)");
+    var lpNode = $(".tb_foot a:last");
     fpNode.on("click", function () {
         $("#page").val($(this).attr("data-id"));
         sendrequest();

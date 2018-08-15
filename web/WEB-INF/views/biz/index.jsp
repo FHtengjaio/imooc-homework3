@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../../../css/common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/form_common.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
+	<script src="../../../js/common.js"></script>
 	<script src="../../../js/login.js"></script>
 	<script src="../../../js/buttonevent.js"></script>
 </head>

@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../../../css/table_common.css" type="text/css">
 	<link rel="stylesheet" href="../../../css/showCourse_special.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
+	<script src="../../../js/common.js"></script>
 	<script src="../../../js/showcourses.js"></script>
 </head>
 <body>

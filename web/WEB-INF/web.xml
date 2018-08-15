@@ -14,4 +14,8 @@
         <error-code>404</error-code>
         <location>/WEB-INF/views/error/404.jsp</location>
     </error-page>
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 </web-app>

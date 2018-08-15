@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../../../css/server.css" type="text/css">
 	<script src="../../../js/jquery-3.3.1.js"></script>
 	<script src="../../../js/server.js"></script>
+	<script src="../../../js/common.js"></script>
 </head>
 <body>
 <div class="top">

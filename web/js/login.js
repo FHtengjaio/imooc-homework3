@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    //获取username，password对象
     var unNode = $("input[name='username']");
     var passwdNode = $("input[name='password']");
 
@@ -33,12 +34,14 @@ $(document).ready(function () {
         checkcode();
     }
 
+    //验证码操作，后台验证
     function checkcode() {
         var vCode = $("#inputCode").val();
         var param = {code:vCode};
         $.post("http://localhost:8080/CheckCode", param, function (data) {
             if(data === "success"){
-                $(".form_box").submit();
+                //验证码通过后，发起登入请求
+                submitform();
             }
             else {
                 alert("验证码出错");
@@ -48,17 +51,38 @@ $(document).ready(function () {
         })
     }
 
+    //表单提交，尝试登入
+    function submitform(){
+        $.getJSON(
+            "http://localhost:8080/Login",
+            {
+                username:unNode.val(),
+                password:passwdNode.val()
+            },
+            function (res) {
+                if (res.result === "success") {
+                    //登入成功，页面跳转至server.jsp
+                    location.assign("http://localhost:8080/Home");
+                } else {
+                    //登入失败，显示错误信息
+                    $(".error_msg").html(res.msg);
+                    $("#code").click();
+                }
+            });
+    }
 
+    //username，password 添加blur，focus事件，正则匹配
     unNode.on("blur", {node:unNode, regex:/^[a-zA-Z0-9_]{3,12}$/}, checkelement);
     unNode.on("focus", function () { $(this).parent().removeClass("regexError");$(this).next().hide(); });
 
     passwdNode.on("blur", {node:passwdNode, regex:/^[a-zA-Z0-9_]{5,12}$/}, checkelement);
     passwdNode.on("focus", function () { $(this).parent().removeClass("regexError");$(this).next().hide();});
 
-
+    //正则匹配
     function checkelement(param) {
         var oNode;
         var regex;
+        //判断调用checkelement函数的来源，属于blur事件还是button点击事件
         if ($(this).prop("nodeName") === "INPUT") {
             oNode = param.data.node;
             regex = param.data.regex;
@@ -67,6 +91,7 @@ $(document).ready(function () {
             regex = param.regex;
         }
 
+        //开始匹配
         if (!regex.test(oNode.val())) {
             oNode.parent().addClass("regexError");
             oNode.next().show();
